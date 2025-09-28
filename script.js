@@ -81,7 +81,7 @@ document.querySelectorAll('.portfolio-item').forEach(item => {
     });
 });
 
-// Contact form handling with Wix Form Widget
+// Contact form handling with Formspree
 const contactForm = document.getElementById('contact-form');
 
 if (contactForm) {
@@ -112,23 +112,29 @@ if (contactForm) {
         submitBtn.textContent = 'Sending...';
         submitBtn.disabled = true;
         
-        // Wix Form Widget submission
-        // Note: Replace with your actual Wix form endpoint
-        const wixFormData = {
-            name: name,
-            email: email,
-            subject: subject,
-            message: message
-        };
-        
-        // For now, simulate Wix form submission
-        // In production, you would use Wix's actual form API
-        setTimeout(() => {
-            showNotification('Thank you! Your message has been sent successfully.', 'success');
-            this.reset();
+        // Submit to Formspree
+        fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                showNotification('Thank you! Your message has been sent successfully.', 'success');
+                this.reset();
+            } else {
+                throw new Error('Form submission failed');
+            }
+        })
+        .catch(error => {
+            showNotification('Sorry, there was an error sending your message. Please try again.', 'error');
+        })
+        .finally(() => {
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
-        }, 2000);
+        });
     });
 }
 
