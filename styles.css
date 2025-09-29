@@ -58,6 +58,7 @@ body {
 .nav-menu {
     display: flex;
     gap: 0.5rem;
+    align-items: center;
 }
 
 .nav-link {
@@ -1379,14 +1380,19 @@ section {
 
 .lang-btn {
     background: transparent;
-    border: 2px solid #fff;
+    border: none;
     color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    padding: 0.5rem;
+    border-radius: 50%;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 1.5rem;
     font-weight: 600;
     transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .lang-btn:hover {
@@ -1395,7 +1401,6 @@ section {
 
 .lang-btn.active {
     background: #ff6b6b;
-    border-color: #ff6b6b;
     color: #fff;
 }
 

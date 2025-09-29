@@ -37,7 +37,7 @@ This file tracks all projects with their release dates. Update the dates as need
 | Team USA | Paris 2024 Olympics | Music Mixer | July 2024 | |
 | Renaissance: A Film | Beyoncé | Supervising Music Editor | December 1, 2023 | |
 | Renaissance World Tour | Beyoncé | Engineer | Summer 2023 | |
-| Beyoncé Bowl 2025 | Beyoncé | Engineer | December 25, 2024 | |
+| Beyoncé Bowl 2024 | Beyoncé | Engineer | December 25, 2024 | |
 
 ## Instructions
 
