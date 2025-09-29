@@ -38,6 +38,7 @@ This file tracks all projects with their release dates. Update the dates as need
 | Renaissance: A Film | Beyoncé | Supervising Music Editor | December 1, 2023 | |
 | Renaissance World Tour | Beyoncé | Engineer | Summer 2023 | |
 | Beyoncé Bowl 2024 | Beyoncé | Engineer | December 25, 2024 | |
+| Carnival Cruise Line | | Sound Technician | 2016 - 2018 | |
 
 ## Instructions
 
