@@ -1419,3 +1419,119 @@ section {
         scroll-behavior: smooth;
     }
 }
+
+/* Media page list layout */
+.media-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.media-item {
+    display: flex;
+    align-items: stretch;
+    gap: 1.25rem;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: 1px solid #eee;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.media-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+.media-thumb {
+    flex: 0 0 260px;
+    max-width: 260px;
+    height: 165px;
+    background: #f8f9fa;
+    overflow: hidden;
+}
+
+.media-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.media-content {
+    flex: 1;
+    padding: 1.25rem 1.25rem 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.media-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.35rem;
+}
+
+.media-outlet {
+    color: #ff6b6b;
+    font-weight: 700;
+    margin-bottom: 0.65rem;
+}
+
+.media-actions {
+    margin-top: 0.5rem;
+}
+
+.media-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.25);
+    transition: all 0.2s ease;
+}
+
+.media-link-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.35);
+}
+
+/* Alternate rows: image right on even rows */
+.media-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.media-item:nth-child(even) .media-content {
+    padding: 1.25rem 0 1.25rem 1.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .media-item,
+    .media-item:nth-child(even) {
+        flex-direction: column;
+    }
+    .media-thumb {
+        width: 100%;
+        max-width: 100%;
+        height: 200px;
+    }
+    .media-content {
+        padding: 1rem;
+    }
+}
+
+/* Force visibility for headers that should not animate out on load */
+.always-visible,
+.always-visible.reveal,
+.always-visible.fade-in-up {
+    opacity: 1 !important;
+    transform: none !important;
+}
