@@ -29,6 +29,82 @@
     <meta name="keywords" content="Matheus Braz, Grammy, Sound Engineer, Mixer, Beyoncé, Childish Gambino, Music Production, Audio Engineering">
     <meta name="author" content="Matheus Braz">
     <link rel="canonical" href="https://matheusbraz.com/">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Matheus Braz",
+      "jobTitle": "Sound Engineer and Mixer",
+      "url": "https://matheusbraz.com",
+      "image": "https://matheusbraz.com/assets/HEADSHOTS/Matheus Braz - Grammy's Picture.JPG",
+      "sameAs": [
+        "https://www.instagram.com/matheusfbraz/"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Los Angeles",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      },
+      "email": "mat@brazsound.com",
+      "award": "Grammy Award Winner - Album of the Year",
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Audio Engineering"
+      },
+      "knowsAbout": [
+        "Audio Engineering",
+        "Music Mixing",
+        "Sound Recording",
+        "Music Production",
+        "Live Sound"
+      ],
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Award",
+          "name": "Grammy Award - Album of the Year",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "The Recording Academy"
+          }
+        }
+      ],
+      "workExample": [
+        {
+          "@type": "CreativeWork",
+          "name": "Cowboy Carter",
+          "creator": {
+            "@type": "Person",
+            "name": "Beyoncé"
+          },
+          "position": "Recording Engineer, Assistant Engineer, Mix Assistant",
+          "award": "Grammy Award - Album of the Year"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "Renaissance",
+          "creator": {
+            "@type": "Person",
+            "name": "Beyoncé"
+          },
+          "position": "Recording Engineer, Assistant Engineer, Mix Assistant"
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "Bando Stone & the New World",
+          "creator": {
+            "@type": "Person",
+            "name": "Childish Gambino"
+          },
+          "position": "Assistant Engineer, Mix Assistant"
+        }
+      ]
+    }
+    </script>
+
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +113,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-logo">
                 <h2>MATHEUS BRAZ</h2>
@@ -49,16 +125,16 @@
                 <a href="discography.html" class="nav-link" data-en="Discography" data-pt="Discografia">Discography</a>
                 <a href="media.html" class="nav-link" data-en="Media" data-pt="Mídia">Media</a>
                 <a href="#contact" class="nav-link" data-en="Contact" data-pt="Contato">Contact</a>
-                <div class="language-toggle">
-                    <button id="lang-toggle" class="lang-btn active" data-lang="en">🇺🇸</button>
-                    <button class="lang-btn" data-lang="pt">🇧🇷</button>
+                <div class="language-toggle" role="group" aria-label="Language selection">
+                    <button id="lang-toggle" class="lang-btn active" data-lang="en" aria-label="Switch to English" aria-pressed="true">🇺🇸</button>
+                    <button class="lang-btn" data-lang="pt" aria-label="Mudar para Português" aria-pressed="false">🇧🇷</button>
                 </div>
             </div>
-            <div class="nav-toggle" id="nav-toggle">
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
         </div>
     </nav>
 
@@ -81,7 +157,10 @@
             </div>
             <div class="hero-image">
                 <div class="image-container">
-                    <img src="assets/HEADSHOTS/Matheus Braz - Grammy's Picture.JPG" alt="Matheus Braz - Grammy Award Winner" class="hero-img">
+                    <picture>
+                        <source srcset="assets/HEADSHOTS/Matheus Braz - Grammy's Picture.webp" type="image/webp">
+                        <img src="assets/HEADSHOTS/Matheus Braz - Grammy's Picture.JPG" alt="Matheus Braz - Grammy Award Winner" class="hero-img">
+                    </picture>
                     <div class="image-overlay"></div>
                 </div>
             </div>
@@ -144,7 +223,10 @@
             <div class="portfolio-grid">
                 <div class="portfolio-item grammy-winner featured">
                     <div class="portfolio-image">
-                        <img src="assets/ALBUM ARTWORK/BEYONCE/COWBOY CARTER/COWBOY CARTER - Recording Engineer:Assistant Engineer:Mix Assistant.jpg" alt="Cowboy Carter - Beyoncé">
+                        <picture>
+                            <source srcset="assets/ALBUM ARTWORK/BEYONCE/COWBOY CARTER/COWBOY CARTER - Recording Engineer:Assistant Engineer:Mix Assistant.webp" type="image/webp">
+                            <img src="assets/ALBUM ARTWORK/BEYONCE/COWBOY CARTER/COWBOY CARTER - Recording Engineer:Assistant Engineer:Mix Assistant.jpg" alt="Cowboy Carter - Beyoncé">
+                        </picture>
                         <div class="portfolio-overlay">
                             <div class="portfolio-content">
                                 <h3>Cowboy Carter</h3>
@@ -160,7 +242,10 @@
                 </div>
                 <div class="portfolio-item renaissance-large grammy-nominated">
                     <div class="portfolio-image">
-                        <img src="assets/ALBUM ARTWORK/BEYONCE/RENAISSANCE/RENAISSANCE - Assistant Engineer:Mix Assistant.jpg" alt="Renaissance - Beyoncé">
+                        <picture>
+                            <source srcset="assets/ALBUM ARTWORK/BEYONCE/RENAISSANCE/RENAISSANCE - Assistant Engineer:Mix Assistant.webp" type="image/webp">
+                            <img src="assets/ALBUM ARTWORK/BEYONCE/RENAISSANCE/RENAISSANCE - Assistant Engineer:Mix Assistant.jpg" alt="Renaissance - Beyoncé">
+                        </picture>
                         <div class="portfolio-overlay">
                             <div class="portfolio-content">
                                 <h3>Renaissance</h3>
@@ -176,7 +261,10 @@
                 </div>
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="assets/ALBUM ARTWORK/CHILDISH GAMBINO/BANDO STONE AND THE NEW WORLD/BANDO STONE AND THE NEW WORLD - Assistant Engineer:Mix Assistant.jpg" alt="Bando Stone & the New World - Childish Gambino">
+                        <picture>
+                            <source srcset="assets/ALBUM ARTWORK/CHILDISH GAMBINO/BANDO STONE AND THE NEW WORLD/BANDO STONE AND THE NEW WORLD - Assistant Engineer:Mix Assistant.webp" type="image/webp">
+                            <img src="assets/ALBUM ARTWORK/CHILDISH GAMBINO/BANDO STONE AND THE NEW WORLD/BANDO STONE AND THE NEW WORLD - Assistant Engineer:Mix Assistant.jpg" alt="Bando Stone & the New World - Childish Gambino">
+                        </picture>
                         <div class="portfolio-overlay">
                             <div class="portfolio-content">
                                 <h3>Bando Stone & the New World</h3>
@@ -249,20 +337,31 @@
                 <div class="credit-category">
                     <h3>2025</h3>
                     <ul class="credit-list">
-                        <li>Cowboy Carter Tour - Beyoncé</li>
-                        <li>Outside - ENHYPEN</li>
-                        <li>Humble Magic Vol. 1 - Adam Blackstone</li>
-                        <li>Color Outside the Lines - Cortis</li>
+                        <li>Cowboy Carter Tour - Beyoncé <span class="credit-role">(Engineer)</span></li>
+                        <li>Outside - ENHYPEN <span class="credit-role">(Mixer)</span></li>
+                        <li>Humble Magic Vol. 1 - Adam Blackstone <span class="credit-role">(Recording Engineer)</span></li>
+                        <li>Color Outside the Lines - Cortis <span class="credit-role">(Mixer)</span></li>
                     </ul>
                 </div>
                 <div class="credit-category">
                     <h3>2024</h3>
                     <ul class="credit-list">
-                        <li>Cowboy Carter - Beyoncé</li>
-                        <li>Team USA - Paris 2024 Olympics</li>
-                        <li>Beyoncé Bowl 2024 - Beyoncé</li>
-                        <li>Bando Stone & the New World - Childish Gambino</li>
-                        <li>Som do Alê - Alê</li>
+                        <li class="grammy-credit">
+                            Cowboy Carter - Beyoncé
+                            <span class="credit-role">(Recording Engineer, Assistant Engineer, Mix Assistant)</span>
+                            <span class="credit-badge grammy-badge-inline">Album of the Year Grammy Winner</span>
+                        </li>
+                        <li>Team USA - Paris 2024 Olympics <span class="credit-role">(Music Mixer)</span></li>
+                        <li>Beyoncé Bowl 2024 - Beyoncé <span class="credit-role">(Engineer)</span></li>
+                        <li>Bando Stone & the New World - Childish Gambino <span class="credit-role">(Assistant Engineer, Mix Assistant)</span></li>
+                    </ul>
+                </div>
+                <div class="credit-category">
+                    <h3>2023</h3>
+                    <ul class="credit-list">
+                        <li>Renaissance: A Film by Beyoncé <span class="credit-role">(Supervising Music Editor)</span></li>
+                        <li>Renaissance World Tour - Beyoncé <span class="credit-role">(Engineer)</span></li>
+                        <li>Delresto (Echoes) - Travis Scott <span class="credit-role">(Engineer)</span></li>
                     </ul>
                 </div>
             </div>
@@ -293,13 +392,13 @@
                         </div>
                     </div>
                     <div class="social-links">
-                        <a href="https://www.instagram.com/matheusfbraz/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/matheusfbraz/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Follow Matheus Braz on Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="contact-form">
                     <!-- Contact Form with Formspree -->
                     <div id="contact-form-container">
-                        <form id="contact-form" action="https://formspree.io/f/xgvnavyq" method="POST">
+                        <form id="contact-form" action="https://formspree.io/f/xgvnavyq" method="POST" aria-label="Contact form">
                             <div class="form-group">
                                 <input type="text" id="name" name="name" placeholder="Your Name" data-placeholder-en="Your Name" data-placeholder-pt="Seu Nome" required>
                             </div>

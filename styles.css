@@ -224,12 +224,19 @@ body {
     height: 500px;
 }
 
+.image-container picture {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
 .hero-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
     transition: transform 0.3s ease;
+    display: block;
 }
 
 .image-overlay {
@@ -430,12 +437,19 @@ section {
     flex: 1;
 }
 
+.portfolio-image picture {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
 .portfolio-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
     transition: transform 0.3s ease;
+    display: block;
 }
 
 .portfolio-overlay {
@@ -533,6 +547,34 @@ section {
 
 .credit-list li:last-child {
     border-bottom: none;
+}
+
+.credit-role {
+    display: block;
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: 0.25rem;
+    font-style: italic;
+}
+
+.grammy-credit {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.02));
+    border-left: 3px solid #ffd700 !important;
+}
+
+.credit-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+.grammy-badge-inline {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #000;
 }
 
 /* Contact Section */
@@ -1407,8 +1449,30 @@ section {
 @media (max-width: 768px) {
     .language-toggle {
         margin-left: 0;
-        margin-top: 1rem;
+        margin-top: 1.5rem;
         justify-content: center;
+        padding: 1rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        gap: 1rem;
+    }
+
+    .lang-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.8rem;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .lang-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .lang-btn.active {
+        background: #ff6b6b;
+        border-color: #ff6b6b;
+        transform: scale(1.1);
     }
 }
 
@@ -1417,6 +1481,55 @@ section {
 @media (prefers-reduced-motion: no-preference) {
     html {
         scroll-behavior: smooth;
+    }
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.back-to-top:active {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
     }
 }
 

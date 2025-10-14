@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matheus Braz | Mixer — Media</title>
     <meta name="description" content="Interviews, features, and press highlights featuring mixer Matheus Braz.">
-    <meta name="robots" content="noindex, nofollow">
 
     <!-- Open Graph / Facebook (kept local until push) -->
     <meta property="og:type" content="website">
@@ -29,7 +28,7 @@
 </head>
 <body>
     <!-- Navigation (no Media link added to other pages; this page is standalone until push) -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="index.html" style="color: #fff; text-decoration: none;">
@@ -43,16 +42,16 @@
                 <a href="discography.html" class="nav-link" data-en="Discography" data-pt="Discografia">Discography</a>
                 <a href="media.html" class="nav-link active" data-en="Media" data-pt="Mídia">Media</a>
                 <a href="index.html#contact" class="nav-link" data-en="Contact" data-pt="Contato">Contact</a>
-                <div class="language-toggle">
-                    <button id="lang-toggle" class="lang-btn active" data-lang="en">🇺🇸</button>
-                    <button class="lang-btn" data-lang="pt">🇧🇷</button>
+                <div class="language-toggle" role="group" aria-label="Language selection">
+                    <button id="lang-toggle" class="lang-btn active" data-lang="en" aria-label="Switch to English" aria-pressed="true">🇺🇸</button>
+                    <button class="lang-btn" data-lang="pt" aria-label="Mudar para Português" aria-pressed="false">🇧🇷</button>
                 </div>
             </div>
-            <div class="nav-toggle" id="nav-toggle">
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
         </div>
     </nav>
 

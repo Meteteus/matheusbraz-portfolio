@@ -4,8 +4,9 @@ const navMenu = document.getElementById('nav-menu');
 
 if (navToggle && navMenu) {
     navToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
+        const isExpanded = navMenu.classList.toggle('active');
         navToggle.classList.toggle('active');
+        navToggle.setAttribute('aria-expanded', isExpanded);
     });
 }
 
@@ -15,31 +16,106 @@ document.querySelectorAll('.nav-link').forEach(link => {
         if (navMenu && navToggle) {
             navMenu.classList.remove('active');
             navToggle.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', false);
         }
     });
 });
 
-// Navbar scroll effect
+// Close mobile menu when clicking outside
+document.addEventListener('click', (event) => {
+    if (navMenu && navToggle) {
+        const isClickInsideNav = event.target.closest('.nav-container');
+        const isMenuActive = navMenu.classList.contains('active');
+
+        if (!isClickInsideNav && isMenuActive) {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', false);
+        }
+    }
+});
+
+// Consolidated Scroll Handler
 const navbar = document.getElementById('navbar');
 let lastScrollTop = 0;
+let backToTopButton = null;
+let ticking = false;
 
-window.addEventListener('scroll', () => {
+// Main consolidated scroll function
+function handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
+
+    // Navbar scroll effect
     if (scrollTop > 100) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
-    
+
+    // Back to top button visibility
+    if (backToTopButton) {
+        if (scrollTop > 300) {
+            backToTopButton.classList.add('visible');
+        } else {
+            backToTopButton.classList.remove('visible');
+        }
+    }
+
+    // Parallax effect for hero section using transform for GPU acceleration
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        // Only apply parallax when scrolled down, reset when at top
+        if (scrollTop > 10) {
+            const rate = scrollTop * -0.5;
+            hero.style.transform = `translate3d(0, ${rate}px, 0)`;
+        } else {
+            hero.style.transform = 'translate3d(0, 0, 0)';
+        }
+    }
+
+    // Smooth reveal animations
+    const reveals = document.querySelectorAll('.reveal');
+    reveals.forEach(reveal => {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveal.getBoundingClientRect().top;
+        const elementVisible = 150;
+
+        if (elementTop < windowHeight - elementVisible) {
+            reveal.classList.add('active');
+        }
+    });
+
     lastScrollTop = scrollTop;
-});
+    ticking = false;
+}
+
+// Request animation frame for smooth 60fps animations
+function requestTick() {
+    if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
+    }
+}
+
+// Use RAF instead of throttle for smoother parallax
+window.addEventListener('scroll', requestTick, { passive: true });
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const href = this.getAttribute('href');
+
+        // Handle #home or just # to scroll to top
+        if (href === '#home' || href === '#') {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            return;
+        }
+
+        const target = document.querySelector(href);
         if (target) {
             const offsetTop = target.offsetTop - 70; // Account for fixed navbar
             window.scrollTo({
@@ -199,16 +275,6 @@ function showNotification(message, type = 'info') {
     });
 }
 
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        const rate = scrolled * -0.5;
-        hero.style.transform = `translateY(${rate}px)`;
-    }
-});
-
 // Hero title is now static - no typing animation
 
 // Lazy loading for images
@@ -228,22 +294,7 @@ document.querySelectorAll('img[data-src]').forEach(img => {
     imageObserver.observe(img);
 });
 
-// Smooth reveal animations
-function revealOnScroll() {
-    const reveals = document.querySelectorAll('.reveal');
-    
-    reveals.forEach(reveal => {
-        const windowHeight = window.innerHeight;
-        const elementTop = reveal.getBoundingClientRect().top;
-        const elementVisible = 150;
-        
-        if (elementTop < windowHeight - elementVisible) {
-            reveal.classList.add('active');
-        }
-    });
-}
-
-window.addEventListener('scroll', revealOnScroll);
+// Reveal on scroll function is now consolidated in main scroll handler
 
 // Add reveal class to elements
 document.addEventListener('DOMContentLoaded', () => {
@@ -303,12 +354,7 @@ function throttle(func, wait) {
     };
 }
 
-// Apply throttling to scroll events
-const throttledScroll = throttle(() => {
-    revealOnScroll();
-}, 100);
-
-window.addEventListener('scroll', throttledScroll);
+// Throttled scroll already applied above in consolidated handler
 
 // Add loading animation
 window.addEventListener('load', () => {
@@ -322,9 +368,27 @@ loadingStyle.textContent = `
         opacity: 0;
         transition: opacity 0.5s ease;
     }
-    
+
     body.loaded {
         opacity: 1;
     }
 `;
 document.head.appendChild(loadingStyle);
+
+// Back to Top Button
+document.addEventListener('DOMContentLoaded', () => {
+    // Create back to top button
+    backToTopButton = document.createElement('button');
+    backToTopButton.className = 'back-to-top';
+    backToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    backToTopButton.setAttribute('aria-label', 'Back to top');
+    document.body.appendChild(backToTopButton);
+
+    // Scroll to top on click
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});

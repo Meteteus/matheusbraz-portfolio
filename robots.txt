@@ -1,0 +1,10 @@
+# robots.txt for matheusbraz.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://matheusbraz.com/sitemap.xml
+
+# Disallow access to specific file types (if needed)
+Disallow: /*.DS_Store$
