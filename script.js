@@ -100,11 +100,144 @@ function requestTick() {
 // Use RAF instead of throttle for smoother parallax
 window.addEventListener('scroll', requestTick, { passive: true });
 
+// Update timecode display with current page/section
+const timecodeValue = document.getElementById('current-page');
+
+// Get current page from URL
+function getCurrentPage() {
+    const pathname = window.location.pathname;
+    const filename = pathname.split('/').pop() || 'index.html';
+    
+    // Check if we're on a specific page
+    if (filename.includes('discography')) {
+        return 'DISCOGRAPHY';
+    } else if (filename.includes('media')) {
+        return 'MEDIA';
+    }
+    
+    // For index page, get current section based on scroll position
+    const sections = document.querySelectorAll('section[id]');
+    const scrollPosition = window.pageYOffset + 150; // Offset for better detection
+    
+    let currentSection = 'HOME';
+    let closestSection = null;
+    let closestDistance = Infinity;
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionBottom = sectionTop + sectionHeight;
+        const sectionId = section.id.toUpperCase();
+        
+        // Check if we're within this section
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            currentSection = sectionId === 'HOME' ? 'HOME' : sectionId;
+            closestSection = section;
+        }
+        
+        // Also track the closest section above current position
+        if (sectionTop <= scrollPosition) {
+            const distance = scrollPosition - sectionTop;
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestSection = section;
+            }
+        }
+    });
+    
+    // If we found a section in view, use it; otherwise use closest section
+    if (currentSection === 'HOME' && closestSection) {
+        const sectionId = closestSection.id.toUpperCase();
+        currentSection = sectionId === 'HOME' ? 'HOME' : sectionId;
+    }
+    
+    return currentSection;
+}
+
+function updateTimecodeDisplay() {
+    if (!timecodeValue) return;
+    
+    const currentPage = getCurrentPage();
+    
+    // Update display
+    timecodeValue.textContent = currentPage;
+    
+    // Update toolbar buttons
+    document.querySelectorAll('.toolbar-btn').forEach(btn => {
+        const page = btn.getAttribute('data-page');
+        if (page === currentPage) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+
+// Handle toolbar button clicks
+document.querySelectorAll('.toolbar-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        
+        // Update active state immediately
+        document.querySelectorAll('.toolbar-btn').forEach(link => {
+            link.classList.remove('active');
+        });
+        this.classList.add('active');
+        
+        // Update timecode display immediately
+        const page = this.getAttribute('data-page');
+        if (timecodeValue && page) {
+            timecodeValue.textContent = page;
+        }
+        
+        // Handle internal links
+        if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                const offsetTop = target.offsetTop - 70; // Account for fixed navbar
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+                // Update again after scroll completes
+                setTimeout(updateTimecodeDisplay, 500);
+            }
+        }
+        // External links will navigate normally
+    });
+});
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const href = this.getAttribute('href');
+
+        // Update active nav link
+        document.querySelectorAll('.nav-link.daw-btn, .toolbar-btn').forEach(link => {
+            link.classList.remove('active');
+        });
+        if (this.classList.contains('daw-btn')) {
+            this.classList.add('active');
+        }
+        
+        // Update toolbar buttons immediately
+        const targetId = href.substring(1);
+        const targetPage = targetId ? targetId.toUpperCase() : 'HOME';
+        document.querySelectorAll('.toolbar-btn').forEach(btn => {
+            const page = btn.getAttribute('data-page');
+            if (page === targetPage) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+        
+        // Update timecode display immediately
+        if (timecodeValue) {
+            timecodeValue.textContent = targetPage;
+        }
 
         // Handle #home or just # to scroll to top
         if (href === '#home' || href === '#') {
@@ -112,6 +245,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 top: 0,
                 behavior: 'smooth'
             });
+            setTimeout(updateTimecodeDisplay, 500);
             return;
         }
 
@@ -122,7 +256,51 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 top: offsetTop,
                 behavior: 'smooth'
             });
+            setTimeout(updateTimecodeDisplay, 500);
         }
+    });
+});
+
+// Update timecode on scroll (throttled for performance)
+let scrollTimeout;
+window.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+        updateTimecodeDisplay();
+    }, 50);
+}, { passive: true });
+
+// Timecode Counter - Current Time Display
+let timecodeInterval = null;
+
+function formatTimecode() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    const milliseconds = Math.floor(now.getMilliseconds() / 10); // Convert to centiseconds (00-99)
+    
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}:${String(milliseconds).padStart(2, '0')}`;
+}
+
+function updateTimecodeCounter() {
+    const timecodeCounter = document.getElementById('timecode-counter');
+    if (!timecodeCounter) return;
+    
+    timecodeCounter.textContent = formatTimecode();
+}
+
+// Initialize timecode display and active states on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updateTimecodeDisplay();
+    
+    // Start timecode counter - shows current time
+    updateTimecodeCounter();
+    timecodeInterval = setInterval(updateTimecodeCounter, 10); // Update every 10ms for smooth display
+    
+    // Also update on hash change (for single-page navigation)
+    window.addEventListener('hashchange', () => {
+        updateTimecodeDisplay();
     });
 });
 
@@ -390,5 +568,29 @@ document.addEventListener('DOMContentLoaded', () => {
             top: 0,
             behavior: 'smooth'
         });
+    });
+});
+
+// Auto-update copyright year
+document.addEventListener('DOMContentLoaded', () => {
+    const currentYear = new Date().getFullYear();
+    const yearElements = document.querySelectorAll('.copyright-year');
+    
+    yearElements.forEach(element => {
+        element.textContent = currentYear;
+    });
+    
+    // Also update data attributes for language switching
+    const copyrightTexts = document.querySelectorAll('.copyright-text');
+    copyrightTexts.forEach(element => {
+        const enText = element.getAttribute('data-en');
+        const ptText = element.getAttribute('data-pt');
+        
+        if (enText) {
+            element.setAttribute('data-en', enText.replace('{year}', currentYear));
+        }
+        if (ptText) {
+            element.setAttribute('data-pt', ptText.replace('{year}', currentYear));
+        }
     });
 });

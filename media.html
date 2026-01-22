@@ -20,33 +20,86 @@
     <meta property="twitter:description" content="Interviews, features, and press highlights featuring mixer Matheus Braz.">
     <meta property="twitter:image" content="https://matheusbraz.com/assets/HEADSHOTS/Matheus Braz - Grammy's Picture.JPG">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="assets/favicon/favicon.png">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation (no Media link added to other pages; this page is standalone until push) -->
+    <!-- Navigation - Pro Tools Transport Bar Style -->
     <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <div class="nav-logo">
-                <a href="index.html" style="color: #fff; text-decoration: none;">
-                    <h2>MATHEUS BRAZ</h2>
-                </a>
-            </div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="index.html" class="nav-link" data-en="Home" data-pt="Início">Home</a>
-                <a href="index.html#about" class="nav-link" data-en="About" data-pt="Sobre">About</a>
-                <a href="index.html#portfolio" class="nav-link" data-en="Featured Work" data-pt="Trabalhos em Destaque">Featured Work</a>
-                <a href="discography.html" class="nav-link" data-en="Discography" data-pt="Discografia">Discography</a>
-                <a href="media.html" class="nav-link active" data-en="Media" data-pt="Mídia">Media</a>
-                <a href="index.html#contact" class="nav-link" data-en="Contact" data-pt="Contato">Contact</a>
-                <div class="language-toggle" role="group" aria-label="Language selection">
-                    <button id="lang-toggle" class="lang-btn active" data-lang="en" aria-label="Switch to English" aria-pressed="true">🇺🇸</button>
-                    <button class="lang-btn" data-lang="pt" aria-label="Mudar para Português" aria-pressed="false">🇧🇷</button>
+            <!-- Left: Mode Selection (2x2 Grid - Visual Only) -->
+            <div class="mode-selection">
+                <div class="mode-grid">
+                    <div class="mode-display" data-mode="SHUFFLE">
+                        <span>SHUFFLE</span>
+                    </div>
+                    <div class="mode-display" data-mode="SPOT">
+                        <span>SPOT</span>
+                    </div>
+                    <div class="mode-display" data-mode="SLIP">
+                        <span>SLIP</span>
+                    </div>
+                    <div class="mode-display" data-mode="GRID">
+                        <span>GRID</span>
+                    </div>
                 </div>
             </div>
+
+            <!-- Center: Timecode Counter -->
+            <div class="timecode-counter">
+                <div class="timecode-counter-display">
+                    <span class="timecode-counter-label">TIME</span>
+                    <span class="timecode-counter-value" id="timecode-counter">00:00:00:00</span>
+                </div>
+            </div>
+
+            <!-- Right: Long Toolbar with All Navigation -->
+            <div class="nav-toolbar">
+                <div class="toolbar-container">
+                    <a href="index.html" class="toolbar-btn" data-page="HOME">
+                        <span>HOME</span>
+                    </a>
+                    <div class="toolbar-divider"></div>
+                    <a href="index.html#about" class="toolbar-btn" data-page="ABOUT">
+                        <span>ABOUT</span>
+                    </a>
+                    <div class="toolbar-divider"></div>
+                    <a href="index.html#work" class="toolbar-btn" data-page="WORK">
+                        <span>WORK</span>
+                    </a>
+                    <div class="toolbar-divider"></div>
+                    <a href="discography.html" class="toolbar-btn" data-page="DISCOGRAPHY">
+                        <span>DISCOGRAPHY</span>
+                    </a>
+                    <div class="toolbar-divider"></div>
+                    <a href="media.html" class="toolbar-btn active" data-page="MEDIA">
+                        <span>MEDIA</span>
+                    </a>
+                    <div class="toolbar-divider"></div>
+                    <a href="index.html#contact" class="toolbar-btn" data-page="CONTACT">
+                        <span>CONTACT</span>
+                    </a>
+                    <div class="toolbar-divider"></div>
+                    <div class="timecode-display">
+                        <span class="timecode-label">PAGE</span>
+                        <span class="timecode-value" id="current-page">MEDIA</span>
+                    </div>
+                    <div class="toolbar-divider"></div>
+                    <div class="language-toggle" role="group" aria-label="Language selection">
+                        <button id="lang-toggle" class="lang-btn active" data-lang="en" aria-label="Switch to English" aria-pressed="true">EN</button>
+                        <button class="lang-btn" data-lang="pt" aria-label="Mudar para Português" aria-pressed="false">PT</button>
+                    </div>
+                </div>
+            </div>
+
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -127,7 +180,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-text">
-                    <p data-en="&copy; 2024 by Matheus Braz. All rights reserved." data-pt="&copy; 2024 por Matheus Braz. Todos os direitos reservados.">&copy; 2024 by Matheus Braz. All rights reserved.</p>
+                    <p class="copyright-text" data-en="&copy; {year} by Matheus Braz. All rights reserved." data-pt="&copy; {year} por Matheus Braz. Todos os direitos reservados.">&copy; <span class="copyright-year">2024</span> by Matheus Braz. All rights reserved.</p>
                 </div>
                 <div class="footer-links">
                     <a href="index.html" data-en="Home" data-pt="Início">Home</a>

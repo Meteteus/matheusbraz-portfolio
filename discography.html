@@ -27,33 +27,87 @@
     <meta name="keywords" content="Matheus Braz, Discography, Grammy, Sound Engineer, Mixer, Beyoncé, Childish Gambino, Music Credits, Audio Engineering">
     <meta name="author" content="Matheus Braz">
     <link rel="canonical" href="https://matheusbraz.com/discography">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="assets/favicon/favicon.png">
+    
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation - Pro Tools Transport Bar Style -->
     <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <div class="nav-logo">
-                <a href="index.html" style="color: #fff; text-decoration: none;">
-                    <h2>MATHEUS BRAZ</h2>
-                </a>
-            </div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="index.html" class="nav-link" data-en="Home" data-pt="Início">Home</a>
-                <a href="index.html#about" class="nav-link" data-en="About" data-pt="Sobre">About</a>
-                <a href="index.html#portfolio" class="nav-link" data-en="Featured Work" data-pt="Trabalhos em Destaque">Featured Work</a>
-                <a href="discography.html" class="nav-link active" data-en="Discography" data-pt="Discografia">Discography</a>
-                <a href="media.html" class="nav-link" data-en="Media" data-pt="Mídia">Media</a>
-                <a href="index.html#contact" class="nav-link" data-en="Contact" data-pt="Contato">Contact</a>
-                <div class="language-toggle" role="group" aria-label="Language selection">
-                    <button id="lang-toggle" class="lang-btn active" data-lang="en" aria-label="Switch to English" aria-pressed="true">🇺🇸</button>
-                    <button class="lang-btn" data-lang="pt" aria-label="Mudar para Português" aria-pressed="false">🇧🇷</button>
+            <!-- Left: Mode Selection (2x2 Grid - Visual Only) -->
+            <div class="mode-selection">
+                <div class="mode-grid">
+                    <div class="mode-display" data-mode="SHUFFLE">
+                        <span>SHUFFLE</span>
+                    </div>
+                    <div class="mode-display" data-mode="SPOT">
+                        <span>SPOT</span>
+                    </div>
+                    <div class="mode-display" data-mode="SLIP">
+                        <span>SLIP</span>
+                    </div>
+                    <div class="mode-display" data-mode="GRID">
+                        <span>GRID</span>
+                    </div>
                 </div>
             </div>
+
+            <!-- Center: Timecode Counter -->
+            <div class="timecode-counter">
+                <div class="timecode-counter-display">
+                    <span class="timecode-counter-label">TIME</span>
+                    <span class="timecode-counter-value" id="timecode-counter">00:00:00:00</span>
+                </div>
+            </div>
+
+            <!-- Right: Long Toolbar with All Navigation -->
+            <div class="nav-toolbar">
+                <div class="toolbar-container">
+                    <a href="index.html" class="toolbar-btn" data-page="HOME">
+                        <span>HOME</span>
+                    </a>
+                    <div class="toolbar-divider"></div>
+                    <a href="index.html#about" class="toolbar-btn" data-page="ABOUT">
+                        <span>ABOUT</span>
+                    </a>
+                    <div class="toolbar-divider"></div>
+                    <a href="index.html#work" class="toolbar-btn" data-page="WORK">
+                        <span>WORK</span>
+                    </a>
+                    <div class="toolbar-divider"></div>
+                    <a href="discography.html" class="toolbar-btn active" data-page="DISCOGRAPHY">
+                        <span>DISCOGRAPHY</span>
+                    </a>
+                    <div class="toolbar-divider"></div>
+                    <a href="media.html" class="toolbar-btn" data-page="MEDIA">
+                        <span>MEDIA</span>
+                    </a>
+                    <div class="toolbar-divider"></div>
+                    <a href="index.html#contact" class="toolbar-btn" data-page="CONTACT">
+                        <span>CONTACT</span>
+                    </a>
+                    <div class="toolbar-divider"></div>
+                    <div class="timecode-display">
+                        <span class="timecode-label">PAGE</span>
+                        <span class="timecode-value" id="current-page">DISCOGRAPHY</span>
+                    </div>
+                    <div class="toolbar-divider"></div>
+                    <div class="language-toggle" role="group" aria-label="Language selection">
+                        <button id="lang-toggle" class="lang-btn active" data-lang="en" aria-label="Switch to English" aria-pressed="true">EN</button>
+                        <button class="lang-btn" data-lang="pt" aria-label="Mudar para Português" aria-pressed="false">PT</button>
+                    </div>
+                </div>
+            </div>
+
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -67,449 +121,399 @@
         <div class="container">
             <div class="page-hero-content">
                 <h1 class="page-title" data-en="Discography" data-pt="Discografia">Discography</h1>
-                <p class="page-subtitle" data-en="A comprehensive collection of my engineering and mixing credits across genres and platforms" data-pt="Uma coleção abrangente dos meus créditos de engenharia e mixagem em gêneros e plataformas">A comprehensive collection of my engineering and mixing credits across genres and platforms</p>
+                <p class="page-subtitle" data-en="Engineering, Mixing & Production" data-pt="Engenharia, Mixagem e Produção">Engineering, Mixing & Production</p>
             </div>
         </div>
     </section>
 
-
-    <!-- Albums Section -->
-    <section class="work-section">
+    <!-- Filter Section -->
+    <section class="discography-filters">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-en="Albums" data-pt="Álbuns">Albums</h2>
-                <p class="section-subtitle" data-en="Full-length studio albums and EPs" data-pt="Álbuns de estúdio completos e EPs">Full-length studio albums and EPs</p>
-            </div>
-            <div class="work-grid">
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/BEYONCE/COWBOY CARTER/COWBOY CARTER - Recording Engineer:Assistant Engineer:Mix Assistant.jpg" alt="Cowboy Carter - Beyoncé">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Cowboy Carter</h3>
-                                <p>Beyoncé</p>
-                                <span class="work-role">Recording Engineer • Assistant Engineer • Mix Assistant</span>
-                                <div class="award-badge">
-                                    <i class="fas fa-trophy"></i>
-                                    <span>Album of the Year Grammy Winner</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/BEYONCE/RENAISSANCE/RENAISSANCE - Assistant Engineer:Mix Assistant.jpg" alt="Renaissance - Beyoncé">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Renaissance</h3>
-                                <p>Beyoncé</p>
-                                <span class="work-role">Recording Engineer • Assistant Engineer • Mix Assistant</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/CHILDISH GAMBINO/BANDO STONE AND THE NEW WORLD/BANDO STONE AND THE NEW WORLD - Assistant Engineer:Mix Assistant.jpg" alt="Bando Stone & the New World - Childish Gambino">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Bando Stone & the New World</h3>
-                                <p>Childish Gambino</p>
-                                <span class="work-role">Assistant Engineer • Mix Assistant</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/ADAM BLACKSTONE/HUMBLE MAGIC VOL 1/HUMBLE MAGIC VOL 1 - Recording Engineer.jpg" alt="Humble Magic Vol 1 - Adam Blackstone">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Humble Magic Vol 1</h3>
-                                <p>Adam Blackstone</p>
-                                <span class="work-role">Recording Engineer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/ALÊ/Som do Alê - EP/Som do Alê - EP - Mixer:Mastering Engineer.png" alt="Som do Alê - EP - Alê">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Som do Alê - EP</h3>
-                                <p>Alê</p>
-                                <span class="work-role">Mixer • Mastering Engineer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/CORTIS/COLOR OUTISDE THE LINES - EP/198704622366_Cover - Mixer.jpg" alt="Color Outside the Lines - EP - Cortis">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Color Outside the Lines - EP</h3>
-                                <p>Cortis</p>
-                                <span class="work-role">Mixer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/Codex Alimentarius/Album 1 - Mixer:Producer.jpg" alt="Album 1 - Codex Alimentarius">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Album 1</h3>
-                                <p>Codex Alimentarius</p>
-                                <span class="work-role">Mixer • Producer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all" data-en="Show All" data-pt="Mostrar Tudo">Show All</button>
+                <button class="filter-btn" data-filter="mixer" data-en="Mixer" data-pt="Mixer">Mixer</button>
+                <button class="filter-btn" data-filter="recording-engineer" data-en="Recording Engineer" data-pt="Engenheiro de Gravação">Recording Engineer</button>
+                <button class="filter-btn" data-filter="assistant-engineer" data-en="Assistant Engineer" data-pt="Engenheiro Assistente">Assistant Engineer</button>
+                <button class="filter-btn" data-filter="mix-assistant" data-en="Mix Assistant" data-pt="Assistente de Mixagem">Mix Assistant</button>
+                <button class="filter-btn" data-filter="producer" data-en="Producer" data-pt="Produtor">Producer</button>
+                <button class="filter-btn" data-filter="mastering" data-en="Mastering" data-pt="Masterização">Mastering</button>
+                <button class="filter-btn" data-filter="engineer" data-en="Engineer" data-pt="Engenheiro">Engineer</button>
+                <button class="filter-btn" data-filter="music-editor" data-en="Music Editor" data-pt="Editor Musical">Music Editor</button>
             </div>
         </div>
     </section>
 
-    <!-- Singles Section -->
-    <section class="work-section">
+    <!-- Discography Grid -->
+    <section class="discography-grid-section">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-en="Singles & Remixes" data-pt="Singles e Remixes">Singles & Remixes</h2>
-                <p class="section-subtitle" data-en="Hit singles and remix productions" data-pt="Singles de sucesso e produções de remix">Hit singles and remix productions</p>
-            </div>
-            <div class="work-grid">
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/BEYONCE/SINGLES/BE ALIVE (SINGLE) - Assistant Engineer:Mix Assistant.jpg" alt="Be Alive - Beyoncé">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Be Alive</h3>
-                                <p>Beyoncé</p>
-                                <span class="work-role">Assistant Engineer • Mix Assistant</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/BEYONCE/SINGLES/BREAK MY SOUL (QUEEN'S REMIX) - Assistant Engineer:Mix Assistant.jpg" alt="Break My Soul (Queen's Remix) - Beyoncé ft. Madonna">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Break My Soul (Queen's Remix)</h3>
-                                <p>Beyoncé ft. Madonna</p>
-                                <span class="work-role">Assistant Engineer • Mix Assistant</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/BEYONCE/SINGLES/CUFF IT (SINGLE) - Assistant Engineer:Mix Assistant.jpg" alt="Cuff It - Beyoncé">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Cuff It</h3>
-                                <p>Beyoncé</p>
-                                <span class="work-role">Assistant Engineer • Mix Assistant</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/ENHYPEN/DESIRE - UNLEASH/DESIRE - UNLEASH - OUTSIDE - Mixer.jpg" alt="Outside - ENHYPEN">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Outside</h3>
-                                <p>ENHYPEN</p>
-                                <span class="work-role">Mixer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
+            <div class="discography-grid" id="discography-grid">
+                <!-- 2026 -->
+                <div class="discography-card" data-roles="mixer">
+                    <div class="discography-artwork">
                         <picture>
                             <source srcset="assets/ALBUM ARTWORK/TAN JIANCI/Proof - Mixer.webp" type="image/webp">
                             <img src="assets/ALBUM ARTWORK/TAN JIANCI/Proof - Mixer.jpg" alt="Proof - Tan Jianci">
                         </picture>
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Proof</h3>
-                                <p>Tan Jianci</p>
-                                <span class="work-role">Mixer</span>
-                            </div>
+                        <div class="discography-overlay">
+                            <div class="discography-role">Mixer</div>
                         </div>
                     </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <picture>
-                            <source srcset="assets/ALBUM ARTWORK/DEE OLIVER/The Becoming - Mixer%2C Mastering.webp" type="image/webp">
-                            <img src="assets/ALBUM ARTWORK/DEE OLIVER/The Becoming - Mixer%2C Mastering.jpg" alt="The Becoming - Dee Oliver">
-                        </picture>
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>The Becoming</h3>
-                                <p>Dee Oliver</p>
-                                <span class="work-role">Mixer • Mastering</span>
-                            </div>
-                        </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Tan Jianci</div>
+                        <div class="discography-title">Proof</div>
                     </div>
                 </div>
-                <div class="work-item" >
-                    <div class="work-image">
+
+                <!-- 2025 -->
+                <div class="discography-card" data-roles="mixer producer mastering">
+                    <div class="discography-artwork">
                         <picture>
                             <source srcset="assets/ALBUM ARTWORK/DEE OLIVER/No End No Start No Road - Mixer%2C Producer%2C Mastering.webp" type="image/webp">
                             <img src="assets/ALBUM ARTWORK/DEE OLIVER/No End No Start No Road - Mixer%2C Producer%2C Mastering.jpg" alt="No End No Start No Road - Dee Oliver">
                         </picture>
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>No End No Start No Road</h3>
-                                <p>Dee Oliver</p>
-                                <span class="work-role">Mixer • Producer • Mastering</span>
-                            </div>
+                        <div class="discography-overlay">
+                            <div class="discography-role">Mixer, Producer, Mastering</div>
                         </div>
                     </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Dee Oliver</div>
+                        <div class="discography-title">No End No Start No Road</div>
+                    </div>
                 </div>
-                <div class="work-item" >
-                    <div class="work-image">
+
+                <div class="discography-card" data-roles="mixer producer mastering">
+                    <div class="discography-artwork">
                         <picture>
                             <source srcset="assets/ALBUM ARTWORK/DEE OLIVER/The Way I Learned To Love (Just For Tonight) - Mixer%2C Producer%2C Mastering.webp" type="image/webp">
                             <img src="assets/ALBUM ARTWORK/DEE OLIVER/The Way I Learned To Love (Just For Tonight) - Mixer%2C Producer%2C Mastering.jpg" alt="The Way I Learned To Love (Just For Tonight) - Dee Oliver">
                         </picture>
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>The Way I Learned To Love (Just For Tonight)</h3>
-                                <p>Dee Oliver</p>
-                                <span class="work-role">Mixer • Producer • Mastering</span>
-                            </div>
+                        <div class="discography-overlay">
+                            <div class="discography-role">Mixer, Producer, Mastering</div>
                         </div>
                     </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/TRAVIS SCOTT/DELRESTO (ECHOES) - Single.jpg" alt="Delresto (Echoes) - Travis Scott">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Delresto (Echoes)</h3>
-                                <p>Travis Scott</p>
-                                <span class="work-role">Engineer</span>
-                            </div>
-                        </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Dee Oliver</div>
+                        <div class="discography-title">The Way I Learned To Love (Just For Tonight)</div>
                     </div>
                 </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/TEF LONDON/Dirty (Acoustic) - Mixer.png" alt="Dirty (Acoustic) - Tef London">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Dirty (Acoustic)</h3>
-                                <p>Tef London</p>
-                                <span class="work-role">Mixer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/TEF LONDON/Crashing Down - Mixer.png" alt="Crashing Down - Tef London">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Crashing Down</h3>
-                                <p>Tef London</p>
-                                <span class="work-role">Mixer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/Indian Brothers/Ao Ver Teu Olhar - Mixer.jpg" alt="Ao Ver Teu Olhar - Indian Brothers">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Ao Ver Teu Olhar</h3>
-                                <p>Indian Brothers</p>
-                                <span class="work-role">Mixer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/Indian Brothers/Minha Paz - Mixer.jpg" alt="Minha Paz - Indian Brothers">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Minha Paz</h3>
-                                <p>Indian Brothers</p>
-                                <span class="work-role">Mixer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/Indian Brothers/Relação de Ajuda - Mixer.jpg" alt="Relação de Ajuda - Indian Brothers">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Relação de Ajuda</h3>
-                                <p>Indian Brothers</p>
-                                <span class="work-role">Mixer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Special Projects Section -->
-    <section class="work-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-en="Special Projects" data-pt="Projetos Especiais">Special Projects</h2>
-                <p class="section-subtitle" data-en="Olympic ceremonies, films, and unique productions" data-pt="Cerimônias olímpicas, filmes e produções únicas">Olympic ceremonies, films, and unique productions</p>
-            </div>
-            <div class="work-grid">
-                <div class="work-item" >
-                    <div class="work-image">
+                <div class="discography-card" data-roles="engineer">
+                    <div class="discography-artwork">
                         <img src="assets/ALBUM ARTWORK/BEYONCE/Cowboy Carter Tour/Cowboy Carter Tour - Engineer.jpg" alt="Cowboy Carter Tour - Beyoncé">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Cowboy Carter Tour</h3>
-                                <p>Beyoncé</p>
-                                <span class="work-role">Engineer</span>
-                            </div>
+                        <div class="discography-overlay">
+                            <div class="discography-role">Engineer</div>
                         </div>
                     </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/BEYONCE/PARIS OLYMPICS 2024/TEAM-USA/2024 OLYMPICS 001.jpg" alt="Team USA - Paris 2024 Olympics">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Team USA</h3>
-                                <p>Paris 2024 Olympics</p>
-                                <span class="work-role">Music Mixer</span>
-                            </div>
-                        </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Beyoncé</div>
+                        <div class="discography-title">Cowboy Carter Tour</div>
                     </div>
                 </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/BEYONCE/RENAISSANCE - A FILM BY BEYONCÉ/RENAISSANCE - A FILM BY BEYONCÉ - Supervising Music Editor.png" alt="Renaissance: A Film by Beyoncé">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Renaissance: A Film</h3>
-                                <p>Beyoncé</p>
-                                <span class="work-role">Supervising Music Editor</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/BEYONCE/RENAISSANCE WORLD TOUR/RENAISSANCE WORLD TOUR - Engineer.webp" alt="Renaissance World Tour - Beyoncé">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Renaissance World Tour</h3>
-                                <p>Beyoncé</p>
-                                <span class="work-role">Engineer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="work-item" >
-                    <div class="work-image">
-                        <img src="assets/ALBUM ARTWORK/BEYONCE/Beyonce Bowl 2025/Beyonce Bowl 2025 - Engineer.jpeg" alt="Beyoncé Bowl 2025 - Beyoncé">
-                        <div class="work-overlay">
-                            <div class="work-content">
-                                <h3>Beyoncé Bowl 2025</h3>
-                                <p>Beyoncé</p>
-                                <span class="work-role">Engineer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Credits List Section -->
-    <section class="credits-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-en="Complete Discography" data-pt="Discografia Completa">Complete Discography</h2>
-                <p class="section-subtitle" data-en="A comprehensive timeline of my engineering and mixing work across all projects and collaborations" data-pt="Uma linha do tempo abrangente do meu trabalho de engenharia e mixagem em todos os projetos e colaborações">A comprehensive timeline of my engineering and mixing work across all projects and collaborations</p>
-            </div>
-            <div class="credits-list">
-                <div class="credit-year">
-                    <h3 data-en="2026" data-pt="2026">2026</h3>
-                    <ul>
-                        <li><strong>Tan Jianci</strong> - Proof (Mixer)</li>
-                    </ul>
+                <div class="discography-card" data-roles="mixer">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/ENHYPEN/DESIRE - UNLEASH/DESIRE - UNLEASH - OUTSIDE - Mixer.jpg" alt="Outside - ENHYPEN">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Mixer</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">ENHYPEN</div>
+                        <div class="discography-title">Outside</div>
+                    </div>
                 </div>
-                <div class="credit-year">
-                    <h3 data-en="2025" data-pt="2025">2025</h3>
-                    <ul>
-                        <li><strong>Dee Oliver</strong> - No End No Start No Road (Mixer, Producer, Mastering)</li>
-                        <li><strong>Dee Oliver</strong> - The Way I Learned To Love (Just For Tonight) (Mixer, Producer, Mastering)</li>
-                        <li><strong>Beyoncé</strong> - Cowboy Carter Tour (Engineer)</li>
-                        <li><strong>ENHYPEN</strong> - Outside (Mixer)</li>
-                        <li><strong>Adam Blackstone</strong> - Humble Magic Vol 1 (Recording Engineer)</li>
-                        <li><strong>Cortis</strong> - Color Outside the Lines - EP (Mixer)</li>
-                    </ul>
+
+                <div class="discography-card" data-roles="recording-engineer">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/ADAM BLACKSTONE/HUMBLE MAGIC VOL 1/HUMBLE MAGIC VOL 1 - Recording Engineer.jpg" alt="Humble Magic Vol 1 - Adam Blackstone">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Recording Engineer</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Adam Blackstone</div>
+                        <div class="discography-title">Humble Magic Vol 1</div>
+                    </div>
                 </div>
-                <div class="credit-year">
-                    <h3 data-en="2024" data-pt="2024">2024</h3>
-                    <ul>
-                        <li><strong>Beyoncé</strong> - Cowboy Carter (Recording Engineer, Assistant Engineer, Mix Assistant) - <em>Album of the Year Grammy Winner</em></li>
-                        <li><strong>Dee Oliver</strong> - The Becoming (Mixer, Mastering)</li>
-                        <li><strong>Beyoncé</strong> - Team USA Paris 2024 Olympics (Music Mixer)</li>
-                        <li><strong>Beyoncé</strong> - Beyoncé Bowl 2024 (Engineer)</li>
-                        <li><strong>Childish Gambino</strong> - Bando Stone & the New World (Assistant Engineer, Mix Assistant)</li>
-                        <li><strong>Alê</strong> - Som do Alê - EP (Mixer, Mastering Engineer)</li>
-                    </ul>
+
+                <div class="discography-card" data-roles="mixer">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/CORTIS/COLOR OUTISDE THE LINES - EP/198704622366_Cover - Mixer.jpg" alt="Color Outside the Lines - EP - Cortis">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Mixer</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Cortis</div>
+                        <div class="discography-title">Color Outside the Lines - EP</div>
+                    </div>
                 </div>
-                <div class="credit-year">
-                    <h3 data-en="2023" data-pt="2023">2023</h3>
-                    <ul>
-                        <li><strong>Beyoncé</strong> - Renaissance: A Film (Supervising Music Editor)</li>
-                        <li><strong>Beyoncé</strong> - Renaissance World Tour (Engineer)</li>
-                        <li><strong>Travis Scott</strong> - Delresto (Echoes) (Engineer)</li>
-                    </ul>
+
+                <!-- 2024 -->
+                <div class="discography-card grammy-winner-card" data-roles="recording-engineer assistant-engineer mix-assistant">
+                    <div class="discography-artwork">
+                        <picture>
+                            <source srcset="assets/ALBUM ARTWORK/BEYONCE/COWBOY CARTER/COWBOY CARTER - Recording Engineer:Assistant Engineer:Mix Assistant.webp" type="image/webp">
+                            <img src="assets/ALBUM ARTWORK/BEYONCE/COWBOY CARTER/COWBOY CARTER - Recording Engineer:Assistant Engineer:Mix Assistant.jpg" alt="Cowboy Carter - Beyoncé">
+                        </picture>
+                        <div class="discography-overlay">
+                            <div class="discography-role">Recording Engineer, Assistant Engineer, Mix Assistant</div>
+                            <div class="grammy-badge-overlay">Album of the Year Grammy Winner</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Beyoncé</div>
+                        <div class="discography-title">Cowboy Carter</div>
+                    </div>
                 </div>
-                <div class="credit-year">
-                    <h3 data-en="2022" data-pt="2022">2022</h3>
-                    <ul>
-                        <li><strong>Beyoncé</strong> - Renaissance (Recording Engineer, Assistant Engineer, Mix Assistant) - <em>Album of the Year Grammy Nominee</em></li>
-                        <li><strong>Beyoncé</strong> - Break My Soul (Queen's Remix) (Assistant Engineer, Mix Assistant)</li>
-                        <li><strong>Beyoncé</strong> - Cuff It (Assistant Engineer, Mix Assistant)</li>
-                    </ul>
+
+                <div class="discography-card" data-roles="mixer mastering">
+                    <div class="discography-artwork">
+                        <picture>
+                            <source srcset="assets/ALBUM ARTWORK/DEE OLIVER/The Becoming - Mixer%2C Mastering.webp" type="image/webp">
+                            <img src="assets/ALBUM ARTWORK/DEE OLIVER/The Becoming - Mixer%2C Mastering.jpg" alt="The Becoming - Dee Oliver">
+                        </picture>
+                        <div class="discography-overlay">
+                            <div class="discography-role">Mixer, Mastering</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Dee Oliver</div>
+                        <div class="discography-title">The Becoming</div>
+                    </div>
                 </div>
-                <div class="credit-year">
-                    <h3 data-en="2021" data-pt="2021">2021</h3>
-                    <ul>
-                        <li><strong>Beyoncé</strong> - Be Alive (Assistant Engineer, Mix Assistant)</li>
-                        <li><strong>Indian Brothers</strong> - Minha Paz (Mixer)</li>
-                    </ul>
+
+                <div class="discography-card" data-roles="engineer">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/BEYONCE/PARIS OLYMPICS 2024/TEAM-USA/2024 OLYMPICS 001.jpg" alt="Team USA - Paris 2024 Olympics">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Music Mixer</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Beyoncé</div>
+                        <div class="discography-title">Team USA - Paris 2024 Olympics</div>
+                    </div>
                 </div>
-                <div class="credit-year">
-                    <h3 data-en="2020" data-pt="2020">2020</h3>
-                    <ul>
-                        <li><strong>Tef London</strong> - Dirty (Acoustic) (Mixer)</li>
-                        <li><strong>Tef London</strong> - Crashing Down (Mixer)</li>
-                        <li><strong>Indian Brothers</strong> - Ao Ver Teu Olhar (Mixer)</li>
-                        <li><strong>Indian Brothers</strong> - Relação de Ajuda (Mixer)</li>
-                    </ul>
+
+                <div class="discography-card" data-roles="engineer">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/BEYONCE/Beyonce Bowl 2025/Beyonce Bowl 2025 - Engineer.jpeg" alt="Beyoncé Bowl 2025 - Beyoncé">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Engineer</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Beyoncé</div>
+                        <div class="discography-title">Beyoncé Bowl 2024</div>
+                    </div>
                 </div>
-                <div class="credit-year">
-                    <h3 data-en="2014" data-pt="2014">2014</h3>
-                    <ul>
-                        <li><strong>Codex Alimentarius</strong> - Album 1 (Mixer, Producer)</li>
-                    </ul>
+
+                <div class="discography-card" data-roles="assistant-engineer mix-assistant">
+                    <div class="discography-artwork">
+                        <picture>
+                            <source srcset="assets/ALBUM ARTWORK/CHILDISH GAMBINO/BANDO STONE AND THE NEW WORLD/BANDO STONE AND THE NEW WORLD - Assistant Engineer:Mix Assistant.webp" type="image/webp">
+                            <img src="assets/ALBUM ARTWORK/CHILDISH GAMBINO/BANDO STONE AND THE NEW WORLD/BANDO STONE AND THE NEW WORLD - Assistant Engineer:Mix Assistant.jpg" alt="Bando Stone & the New World - Childish Gambino">
+                        </picture>
+                        <div class="discography-overlay">
+                            <div class="discography-role">Assistant Engineer, Mix Assistant</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Childish Gambino</div>
+                        <div class="discography-title">Bando Stone & the New World</div>
+                    </div>
+                </div>
+
+                <div class="discography-card" data-roles="mixer mastering">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/ALÊ/Som do Alê - EP/Som do Alê - EP - Mixer:Mastering Engineer.png" alt="Som do Alê - EP - Alê">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Mixer, Mastering</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Alê</div>
+                        <div class="discography-title">Som do Alê - EP</div>
+                    </div>
+                </div>
+
+                <!-- 2023 -->
+                <div class="discography-card" data-roles="music-editor">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/BEYONCE/RENAISSANCE - A FILM BY BEYONCÉ/RENAISSANCE - A FILM BY BEYONCÉ - Supervising Music Editor.png" alt="Renaissance: A Film by Beyoncé">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Music Editor</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Beyoncé</div>
+                        <div class="discography-title">Renaissance: A Film by Beyoncé</div>
+                    </div>
+                </div>
+
+                <div class="discography-card" data-roles="engineer">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/BEYONCE/RENAISSANCE WORLD TOUR/RENAISSANCE WORLD TOUR - Engineer.webp" alt="Renaissance World Tour - Beyoncé">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Engineer</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Beyoncé</div>
+                        <div class="discography-title">Renaissance World Tour</div>
+                    </div>
+                </div>
+
+                <div class="discography-card" data-roles="engineer">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/TRAVIS SCOTT/DELRESTO (ECHOES) - Single.jpg" alt="Delresto (Echoes) - Travis Scott">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Engineer</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Travis Scott</div>
+                        <div class="discography-title">Delresto (Echoes)</div>
+                    </div>
+                </div>
+
+                <!-- 2022 -->
+                <div class="discography-card grammy-nominee-card" data-roles="recording-engineer assistant-engineer mix-assistant">
+                    <div class="discography-artwork">
+                        <picture>
+                            <source srcset="assets/ALBUM ARTWORK/BEYONCE/RENAISSANCE/RENAISSANCE - Assistant Engineer:Mix Assistant.webp" type="image/webp">
+                            <img src="assets/ALBUM ARTWORK/BEYONCE/RENAISSANCE/RENAISSANCE - Assistant Engineer:Mix Assistant.jpg" alt="Renaissance - Beyoncé">
+                        </picture>
+                        <div class="discography-overlay">
+                            <div class="discography-role">Recording Engineer, Assistant Engineer, Mix Assistant</div>
+                            <div class="grammy-badge-overlay nominee">Album of the Year Grammy Nominee</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Beyoncé</div>
+                        <div class="discography-title">Renaissance</div>
+                    </div>
+                </div>
+
+                <div class="discography-card" data-roles="assistant-engineer mix-assistant">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/BEYONCE/SINGLES/BREAK MY SOUL (QUEEN'S REMIX) - Assistant Engineer:Mix Assistant.jpg" alt="Break My Soul (Queen's Remix) - Beyoncé ft. Madonna">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Assistant Engineer, Mix Assistant</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Beyoncé</div>
+                        <div class="discography-title">Break My Soul (Queen's Remix)</div>
+                    </div>
+                </div>
+
+                <div class="discography-card" data-roles="assistant-engineer mix-assistant">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/BEYONCE/SINGLES/CUFF IT (SINGLE) - Assistant Engineer:Mix Assistant.jpg" alt="Cuff It - Beyoncé">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Assistant Engineer, Mix Assistant</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Beyoncé</div>
+                        <div class="discography-title">Cuff It</div>
+                    </div>
+                </div>
+
+                <!-- 2021 -->
+                <div class="discography-card" data-roles="assistant-engineer mix-assistant">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/BEYONCE/SINGLES/BE ALIVE (SINGLE) - Assistant Engineer:Mix Assistant.jpg" alt="Be Alive - Beyoncé">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Assistant Engineer, Mix Assistant</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Beyoncé</div>
+                        <div class="discography-title">Be Alive</div>
+                    </div>
+                </div>
+
+                <div class="discography-card" data-roles="mixer">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/Indian Brothers/Minha Paz - Mixer.jpg" alt="Minha Paz - Indian Brothers">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Mixer</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Indian Brothers</div>
+                        <div class="discography-title">Minha Paz</div>
+                    </div>
+                </div>
+
+                <!-- 2020 -->
+                <div class="discography-card" data-roles="mixer">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/TEF LONDON/Dirty (Acoustic) - Mixer.png" alt="Dirty (Acoustic) - Tef London">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Mixer</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Tef London</div>
+                        <div class="discography-title">Dirty (Acoustic)</div>
+                    </div>
+                </div>
+
+                <div class="discography-card" data-roles="mixer">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/TEF LONDON/Crashing Down - Mixer.png" alt="Crashing Down - Tef London">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Mixer</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Tef London</div>
+                        <div class="discography-title">Crashing Down</div>
+                    </div>
+                </div>
+
+                <div class="discography-card" data-roles="mixer">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/Indian Brothers/Ao Ver Teu Olhar - Mixer.jpg" alt="Ao Ver Teu Olhar - Indian Brothers">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Mixer</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Indian Brothers</div>
+                        <div class="discography-title">Ao Ver Teu Olhar</div>
+                    </div>
+                </div>
+
+                <div class="discography-card" data-roles="mixer">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/Indian Brothers/Relação de Ajuda - Mixer.jpg" alt="Relação de Ajuda - Indian Brothers">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Mixer</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Indian Brothers</div>
+                        <div class="discography-title">Relação de Ajuda</div>
+                    </div>
+                </div>
+
+                <!-- 2014 -->
+                <div class="discography-card" data-roles="mixer producer">
+                    <div class="discography-artwork">
+                        <img src="assets/ALBUM ARTWORK/Codex Alimentarius/Album 1 - Mixer:Producer.jpg" alt="Album 1 - Codex Alimentarius">
+                        <div class="discography-overlay">
+                            <div class="discography-role">Mixer, Producer</div>
+                        </div>
+                    </div>
+                    <div class="discography-info">
+                        <div class="discography-artist">Codex Alimentarius</div>
+                        <div class="discography-title">Album 1</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -520,12 +524,12 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-text">
-                    <p data-en="&copy; 2024 by Matheus Braz. All rights reserved." data-pt="&copy; 2024 por Matheus Braz. Todos os direitos reservados.">&copy; 2024 by Matheus Braz. All rights reserved.</p>
+                    <p class="copyright-text" data-en="&copy; {year} by Matheus Braz. All rights reserved." data-pt="&copy; {year} por Matheus Braz. Todos os direitos reservados.">&copy; <span class="copyright-year">2024</span> by Matheus Braz. All rights reserved.</p>
                 </div>
                 <div class="footer-links">
                     <a href="index.html" data-en="Home" data-pt="Início">Home</a>
                     <a href="index.html#about" data-en="About" data-pt="Sobre">About</a>
-                    <a href="index.html#portfolio" data-en="Featured Work" data-pt="Trabalhos em Destaque">Featured Work</a>
+                    <a href="index.html#work" data-en="Work" data-pt="Trabalhos">Work</a>
                     <a href="discography.html" data-en="Discography" data-pt="Discografia">Discography</a>
                     <a href="media.html" data-en="Media" data-pt="Mídia">Media</a>
                     <a href="index.html#contact" data-en="Contact" data-pt="Contato">Contact</a>

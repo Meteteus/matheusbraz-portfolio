@@ -140,13 +140,25 @@ function updateText(element, key) {
 
 // Function to update all elements with data attributes
 function updateLanguage() {
+    const currentYear = new Date().getFullYear();
+    
     // Update elements with data-en and data-pt attributes
     const elements = document.querySelectorAll('[data-en][data-pt]');
     elements.forEach(element => {
-        const text = currentLanguage === 'en' ? 
+        let text = currentLanguage === 'en' ? 
             element.getAttribute('data-en') : 
             element.getAttribute('data-pt');
-        element.textContent = text;
+        
+        // For copyright text, preserve the year span structure
+        if (element.classList.contains('copyright-text')) {
+            // Replace {year} with span-wrapped current year
+            text = text.replace('{year}', '<span class="copyright-year">' + currentYear + '</span>');
+            element.innerHTML = text;
+        } else {
+            // Replace {year} placeholder with current year for other elements
+            text = text.replace('{year}', currentYear);
+            element.textContent = text;
+        }
     });
     
     // Update form placeholders
