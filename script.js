@@ -179,16 +179,22 @@ document.querySelectorAll('.toolbar-btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
         
-        // Update active state immediately
-        document.querySelectorAll('.toolbar-btn').forEach(link => {
-            link.classList.remove('active');
-        });
-        this.classList.add('active');
+        // Check if it's an external link
+        const isExternal = href && (href.startsWith('http://') || href.startsWith('https://'));
         
-        // Update timecode display immediately
-        const page = this.getAttribute('data-page');
-        if (timecodeValue && page) {
-            timecodeValue.textContent = page;
+        // Only update active state for internal links
+        if (!isExternal) {
+            // Update active state immediately
+            document.querySelectorAll('.toolbar-btn').forEach(link => {
+                link.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            // Update timecode display immediately
+            const page = this.getAttribute('data-page');
+            if (timecodeValue && page) {
+                timecodeValue.textContent = page;
+            }
         }
         
         // Handle internal links
@@ -205,7 +211,7 @@ document.querySelectorAll('.toolbar-btn').forEach(btn => {
                 setTimeout(updateTimecodeDisplay, 500);
             }
         }
-        // External links will navigate normally
+        // External links will navigate normally (no active state change)
     });
 });
 
@@ -301,6 +307,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Also update on hash change (for single-page navigation)
     window.addEventListener('hashchange', () => {
+        updateTimecodeDisplay();
+    });
+    
+    // Reset active state when window regains focus (user returns from external link)
+    window.addEventListener('focus', () => {
         updateTimecodeDisplay();
     });
     
@@ -596,3 +607,122 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Auto-populate Recent Credits from Discography
+function populateRecentCredits() {
+    const creditsList1 = document.getElementById('recent-credits-list-1');
+    const creditsList2 = document.getElementById('recent-credits-list-2');
+    
+    // Only run on index.html
+    if (!creditsList1 || !creditsList2) return;
+    
+    // Fetch discography.html and parse it
+    fetch('discography.html')
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const discographyCards = doc.querySelectorAll('.discography-card');
+            
+            const credits = [];
+            
+            discographyCards.forEach((card, index) => {
+                const artistEl = card.querySelector('.discography-artist');
+                const titleEl = card.querySelector('.discography-title');
+                const roleEl = card.querySelector('.discography-role');
+                const imgEl = card.querySelector('img');
+                const sourceEl = card.querySelector('source');
+                
+                if (!artistEl || !titleEl || !roleEl) return;
+                
+                const artist = artistEl.textContent.trim();
+                const title = titleEl.textContent.trim();
+                const role = roleEl.textContent.trim();
+                
+                // Try to extract release date from image filename or source
+                let releaseDate = null;
+                const imgSrc = (imgEl?.src || imgEl?.getAttribute('src') || sourceEl?.getAttribute('srcset') || '').toString();
+                const dateMatch = imgSrc.match(/Released[_-](\w+)[_-](\d+)[_-](\d+)/i);
+                if (dateMatch) {
+                    // Format: Jun-26-2025
+                    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    const month = monthNames.indexOf(dateMatch[1]) + 1;
+                    const day = parseInt(dateMatch[2]);
+                    const year = parseInt(dateMatch[3]);
+                    if (month && day && year) {
+                        releaseDate = new Date(year, month - 1, day);
+                    }
+                }
+                
+                // If no date found, use position as fallback (earlier in DOM = more recent)
+                // Assign a date far in the future minus index to maintain order
+                if (!releaseDate) {
+                    const futureDate = new Date(2099, 11, 31);
+                    futureDate.setDate(futureDate.getDate() - index);
+                    releaseDate = futureDate;
+                }
+                
+                // Check for grammy badge
+                const hasGrammy = card.classList.contains('grammy-winner-card') || 
+                                 card.querySelector('.grammy-badge-overlay');
+                const grammyText = hasGrammy ? 
+                    (card.querySelector('.grammy-badge-overlay')?.textContent.trim() || 'Album of the Year Grammy Winner') : null;
+                
+                credits.push({
+                    artist,
+                    title,
+                    role,
+                    releaseDate,
+                    hasGrammy,
+                    grammyText
+                });
+            });
+            
+            // Sort by release date (most recent first), then by artist/title
+            credits.sort((a, b) => {
+                if (b.releaseDate.getTime() !== a.releaseDate.getTime()) {
+                    return b.releaseDate.getTime() - a.releaseDate.getTime();
+                }
+                return a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title);
+            });
+            
+            // Take the most recent 14-16 credits
+            const recentCredits = credits.slice(0, 16);
+            
+            // Split into two columns
+            const midPoint = Math.ceil(recentCredits.length / 2);
+            const column1 = recentCredits.slice(0, midPoint);
+            const column2 = recentCredits.slice(midPoint);
+            
+            // Populate first column
+            creditsList1.innerHTML = column1.map(credit => {
+                let html = `<li${credit.hasGrammy ? ' class="grammy-credit"' : ''}>`;
+                html += `${credit.title} - ${credit.artist} `;
+                html += `<span class="credit-role">(${credit.role})</span>`;
+                if (credit.grammyText) {
+                    html += ` <span class="credit-badge grammy-badge-inline">${credit.grammyText}</span>`;
+                }
+                html += `</li>`;
+                return html;
+            }).join('');
+            
+            // Populate second column
+            creditsList2.innerHTML = column2.map(credit => {
+                let html = `<li${credit.hasGrammy ? ' class="grammy-credit"' : ''}>`;
+                html += `${credit.title} - ${credit.artist} `;
+                html += `<span class="credit-role">(${credit.role})</span>`;
+                if (credit.grammyText) {
+                    html += ` <span class="credit-badge grammy-badge-inline">${credit.grammyText}</span>`;
+                }
+                html += `</li>`;
+                return html;
+            }).join('');
+        })
+        .catch(error => {
+            console.error('Error loading discography for Recent Credits:', error);
+            // Fallback: show a message or keep empty
+        });
+}
+
+// Run on page load
+document.addEventListener('DOMContentLoaded', populateRecentCredits);

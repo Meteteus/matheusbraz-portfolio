@@ -292,6 +292,23 @@ body {
     color: var(--color-text-white);
 }
 
+.toolbar-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    padding: 6px 10px;
+}
+
+.toolbar-social i {
+    font-size: 14px;
+}
+
+.toolbar-social:hover {
+    background: #3a4a5a; /* Pro Tools hover - grey-blue */
+    color: var(--color-text-white);
+}
+
 .toolbar-divider {
     width: 1px;
     height: 30px;
