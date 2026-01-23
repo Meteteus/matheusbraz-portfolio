@@ -1,20 +1,21 @@
-// Mobile Navigation Toggle
+// Mobile Navigation Toggle - Toggle the existing nav-toolbar
 const navToggle = document.getElementById('nav-toggle');
-const navMenu = document.getElementById('nav-menu');
+const navToolbar = document.querySelector('.nav-toolbar');
 
-if (navToggle && navMenu) {
-    navToggle.addEventListener('click', () => {
-        const isExpanded = navMenu.classList.toggle('active');
+if (navToggle && navToolbar) {
+    navToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isExpanded = navToolbar.classList.toggle('mobile-active');
         navToggle.classList.toggle('active');
         navToggle.setAttribute('aria-expanded', isExpanded);
     });
 }
 
 // Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(link => {
+document.querySelectorAll('.toolbar-btn').forEach(link => {
     link.addEventListener('click', () => {
-        if (navMenu && navToggle) {
-            navMenu.classList.remove('active');
+        if (navToolbar && navToggle) {
+            navToolbar.classList.remove('mobile-active');
             navToggle.classList.remove('active');
             navToggle.setAttribute('aria-expanded', false);
         }
@@ -23,12 +24,12 @@ document.querySelectorAll('.nav-link').forEach(link => {
 
 // Close mobile menu when clicking outside
 document.addEventListener('click', (event) => {
-    if (navMenu && navToggle) {
-        const isClickInsideNav = event.target.closest('.nav-container');
-        const isMenuActive = navMenu.classList.contains('active');
+    if (navToolbar && navToggle) {
+        const isClickInsideNav = event.target.closest('.navbar');
+        const isMenuActive = navToolbar.classList.contains('mobile-active');
 
         if (!isClickInsideNav && isMenuActive) {
-            navMenu.classList.remove('active');
+            navToolbar.classList.remove('mobile-active');
             navToggle.classList.remove('active');
             navToggle.setAttribute('aria-expanded', false);
         }
@@ -302,6 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('hashchange', () => {
         updateTimecodeDisplay();
     });
+    
 });
 
 // Intersection Observer for fade-in animations
