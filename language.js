@@ -16,7 +16,7 @@ const translations = {
         'hero-role': 'MIXER / ENGINEER',
         'hero-description': 'Crafting sonic excellence for the world\'s most iconic artists and projects',
         'btn-work': 'View My Work',
-        'btn-contact': 'Get In Touch',
+        'btn-contact': "Let's Talk",
         
         // About Section
         'about-title': 'About Me',
@@ -40,7 +40,7 @@ const translations = {
         
         // Contact Section
         'contact-title': 'Get In Touch',
-        'contact-subtitle': 'Ready to bring your project to life? Let\'s create something amazing together.',
+        'contact-subtitle': "I'd love to hear about your next project",
         'contact-name': 'Name',
         'contact-email': 'Email',
         'contact-message': 'Message',
@@ -79,7 +79,7 @@ const translations = {
         'hero-role': 'MIXER / ENGENHEIRO',
         'hero-description': 'Criando excelência sonora para os artistas e projetos mais icônicos do mundo',
         'btn-work': 'Ver Meu Trabalho',
-        'btn-contact': 'Entre em Contato',
+        'btn-contact': 'Vamos Conversar',
         
         // About Section
         'about-title': 'Sobre Mim',
@@ -103,7 +103,7 @@ const translations = {
         
         // Contact Section
         'contact-title': 'Entre em Contato',
-        'contact-subtitle': 'Pronto para dar vida ao seu projeto? Vamos criar algo incrível juntos.',
+        'contact-subtitle': 'Adoraria saber sobre seu próximo projeto',
         'contact-name': 'Nome',
         'contact-email': 'Email',
         'contact-message': 'Mensagem',

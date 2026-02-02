@@ -1047,6 +1047,45 @@ section {
     font-size: var(--font-size-base);
 }
 
+.contact-reach-intro {
+    color: var(--color-text-light);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.contact-link {
+    color: var(--color-text-light);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.contact-link:hover {
+    color: var(--color-text-white);
+}
+
+.contact-item-link {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+}
+
+.contact-item-link i {
+    font-size: var(--font-size-2xl);
+    color: var(--color-accent);
+    width: 40px;
+    flex-shrink: 0;
+}
+
+.form-expectations {
+    margin-top: var(--space-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    text-align: center;
+}
+
 .social-links {
     display: flex;
     gap: var(--space-md);
@@ -1059,8 +1098,9 @@ section {
     justify-content: center;
     width: 50px;
     height: 50px;
-    background: var(--color-accent);
-    color: var(--color-text-white);
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     text-decoration: none;
     font-size: var(--font-size-lg);
     transition: var(--transition);
@@ -1069,10 +1109,10 @@ section {
 }
 
 .social-link:hover {
-    background: var(--color-accent-light);
-    color: var(--color-primary-dark);
+    background: rgba(255, 255, 255, 0.18);
+    color: var(--color-text-white);
+    border-color: rgba(255, 255, 255, 0.4);
     transform: translateY(-4px) scale(1.05);
-    box-shadow: var(--shadow-accent);
 }
 
 .contact-form {
@@ -1113,9 +1153,9 @@ section {
 #contact-form button {
     width: 100%;
     padding: var(--space-md) var(--space-2xl);
-    background: var(--color-accent);
-    color: var(--color-text-white);
-    border: none;
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     font-size: var(--font-size-sm);
     font-weight: 700;
     text-transform: uppercase;
@@ -1126,8 +1166,9 @@ section {
 }
 
 #contact-form button:hover {
-    background: var(--color-accent-light);
-    color: var(--color-primary-dark);
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--color-text-white);
+    border-color: rgba(255, 255, 255, 0.45);
     transform: translateY(-2px);
 }
 
@@ -1762,10 +1803,10 @@ section {
     right: var(--space-xl);
     width: 50px;
     height: 50px;
-    background: var(--color-accent);
-    color: var(--color-text-white);
-    border: none;
-    border-radius: 0;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: var(--radius-lg);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1776,6 +1817,7 @@ section {
     transform: translateY(20px);
     transition: var(--transition);
     z-index: 999;
+    box-shadow: var(--shadow-md);
 }
 
 .back-to-top.visible {
@@ -1785,9 +1827,10 @@ section {
 }
 
 .back-to-top:hover {
-    background: var(--color-accent-light);
-    color: var(--color-primary-dark);
-    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.18);
+    color: var(--color-text-white);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-4px) scale(1.05);
 }
 
 /* ============================================
