@@ -1,113 +1,95 @@
-# Matheus Braz - Portfolio Website
+# Matheus Braz | Mixer
 
-A modern, responsive portfolio website for Grammy award-winning sound engineer Matheus Braz.
+A modern, responsive portfolio website for Grammy award-winning sound engineer Matheus Braz. Built with a Figma/React-inspired design using Braz Sound brand colors.
+
+**Live site:** [matheusbraz.com](https://matheusbraz.com)
 
 ## Features
 
-- **Modern Design**: Clean, professional layout with smooth animations
-- **Responsive**: Optimized for desktop, tablet, and mobile devices
-- **Interactive**: Smooth scrolling, hover effects, and dynamic content
-- **SEO Optimized**: Proper meta tags and semantic HTML structure
-- **Fast Loading**: Optimized CSS and JavaScript for quick page loads
+- **Modern design**: Clean, professional layout with glass-style buttons, smooth transitions, and subtle shadows
+- **Brand consistency**: Color palette matched to Braz Sound logo (deep teal `#1A4B4F`, lime green `#91ED33`)
+- **Bilingual**: English / Portuguese toggle
+- **Responsive**: Optimized for desktop, tablet, and mobile
+- **Studio showcase**: Carousel with studio photos and lightbox for detailed viewing
+- **Contact options**: Clickable email, prominent Instagram link, Formspree contact form with response expectations
 
 ## Sections
 
-1. **Hero Section**: Eye-catching introduction with animated title
-2. **About**: Professional background and achievements
-3. **Portfolio**: Featured work with interactive gallery
-4. **Credits**: Comprehensive list of projects and collaborations
-5. **Contact**: Contact form and social media links
+| Section | Description |
+|--------|-------------|
+| **Hero** | Introduction with blurred studio background, CTA buttons |
+| **Work** | Featured portfolio items (filterable: Album, Single, Film, Ad Spot) |
+| **Recent Credits** | Extended list of projects and collaborations |
+| **About** | Bio and professional background |
+| **Studio** | Carousel of studio pictures (click to enlarge) |
+| **Contact** | Form, email link, Instagram, location, response expectations |
 
-## Technologies Used
+## Additional Pages
 
-- **HTML5**: Semantic markup structure
-- **CSS3**: Modern styling with Flexbox and Grid
-- **JavaScript**: Interactive features and animations
-- **Font Awesome**: Icons for enhanced visual appeal
-- **Google Fonts**: Inter font family for modern typography
+- **Discography** (`discography.html`) – Full discography grid with filters
+- **Media** (`media.html`) – Interviews and features
 
-## Setup Instructions
+## Tech Stack
 
-### 1. Add Images
-Place the required images in the `assets/` folder:
-- `sound-engineer.jpg` - Main hero image
-- `beyonce-renaissance.jpg` - Portfolio item
-- `cowboy-carter.jpg` - Portfolio item
-- `bando-stone.jpg` - Portfolio item
-- `team-usa.jpg` - Portfolio item
-- `renaissance-film.jpg` - Portfolio item
-- `be-alive.jpg` - Portfolio item
-
-### 2. Customize Content
-Edit the following files to personalize:
-- `index.html` - Update contact information, social links, and project details
-- `styles.css` - Modify colors, fonts, or layout as needed
-- `script.js` - Adjust animations or add new functionality
-
-### 3. Deploy
-Upload all files to your hosting platform:
-- **WIX**: Upload via the WIX File Manager
-- **Other Platforms**: Upload to any web hosting service
+- **HTML5** – Semantic markup
+- **CSS3** – CSS variables, Flexbox, Grid, modern styling
+- **JavaScript** – Navigation, carousel, lightbox, scroll effects, language toggle
+- **Font Awesome** – Icons
+- **Google Fonts** – Inter font family
+- **Formspree** – Contact form backend
 
 ## File Structure
 
 ```
 /
-├── index.html          # Main HTML file
-├── styles.css          # CSS styles
-├── script.js           # JavaScript functionality
-├── assets/             # Images and media files
-│   ├── README.md       # Asset guidelines
-│   └── [images...]     # Portfolio images
-└── README.md           # This file
+├── index.html          # Main page
+├── discography.html    # Discography page
+├── media.html          # Media / interviews page
+├── styles.css          # Global styles (Braz Sound design system)
+├── script.js           # Main JavaScript
+├── language.js         # EN/PT translations
+├── sitemap.xml         # SEO sitemap
+├── assets/
+│   ├── ALBUM ARTWORK/  # Portfolio artwork by artist
+│   ├── Braz Sound Logo/
+│   ├── HEADSHOTS/      # Profile images
+│   ├── studio/         # Hero background
+│   ├── STUDIO PICS/    # Carousel images
+│   └── favicon/
+└── README.md
 ```
 
-## Browser Support
+## Design System (CSS Variables)
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers
+Colors are defined in `styles.css` and can be adjusted via `:root`:
 
-## Performance Features
+- **Primary**: `#1A4B4F` (deep teal)
+- **Accent**: `#91ED33` (lime green)
+- **Backgrounds**: Teal family (`--color-bg`, `--color-bg-dark`, `--color-bg-panel`)
+- **Text**: `--color-text`, `--color-text-light`, `--color-text-white`
 
-- Lazy loading for images
-- Throttled scroll events
-- Optimized animations
-- Minimal JavaScript footprint
-- CSS-only animations where possible
+## Setup & Development
 
-## Customization
+1. Clone the repository
+2. Open `index.html` in a browser, or use a local server (e.g. `npx serve .`)
+3. Edit `index.html`, `styles.css`, or `script.js` as needed
 
-### Colors
-The main brand color is `#ff6b6b` (coral red). To change it:
-1. Open `styles.css`
-2. Find and replace all instances of `#ff6b6b`
-3. Update the gradient colors as well
+## Deployment
 
-### Fonts
-The site uses Inter font family. To change:
-1. Update the Google Fonts link in `index.html`
-2. Modify the `font-family` property in `styles.css`
+The site is deployed via **GitHub Pages**. Push to the `main` branch to trigger deployment.
 
-### Layout
-The site uses CSS Grid and Flexbox for responsive layouts. Modify the grid properties in `styles.css` to adjust the layout.
+```bash
+git add .
+git commit -m "Your message"
+git push
+```
 
 ## Contact Form
 
-The contact form includes:
-- Client-side validation
-- Success/error notifications
-- Form reset after submission
-- Responsive design
-
-Note: The form currently simulates submission. For production use, integrate with a backend service or email service provider.
+- Powered by [Formspree](https://formspree.io)
+- Includes client-side validation
+- Response expectations shown below the form
 
 ## License
 
-This project is created for Matheus Braz's personal portfolio. All rights reserved.
-
-## Support
-
-For technical support or customization requests, please contact the developer.
+Created for Matheus Braz's personal portfolio. All rights reserved.
