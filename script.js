@@ -101,9 +101,6 @@ function requestTick() {
 // Use RAF instead of throttle for smoother parallax
 window.addEventListener('scroll', requestTick, { passive: true });
 
-// Update timecode display with current page/section
-const timecodeValue = document.getElementById('current-page');
-
 // Get current page from URL
 function getCurrentPage() {
     const pathname = window.location.pathname;
@@ -155,13 +152,8 @@ function getCurrentPage() {
     return currentSection;
 }
 
-function updateTimecodeDisplay() {
-    if (!timecodeValue) return;
-    
+function updateNavActiveState() {
     const currentPage = getCurrentPage();
-    
-    // Update display
-    timecodeValue.textContent = currentPage;
     
     // Update toolbar buttons
     document.querySelectorAll('.toolbar-btn').forEach(btn => {
@@ -189,12 +181,6 @@ document.querySelectorAll('.toolbar-btn').forEach(btn => {
                 link.classList.remove('active');
             });
             this.classList.add('active');
-            
-            // Update timecode display immediately
-            const page = this.getAttribute('data-page');
-            if (timecodeValue && page) {
-                timecodeValue.textContent = page;
-            }
         }
         
         // Handle internal links
@@ -202,13 +188,13 @@ document.querySelectorAll('.toolbar-btn').forEach(btn => {
             e.preventDefault();
             const target = document.querySelector(href);
             if (target) {
-                const offsetTop = target.offsetTop - 70; // Account for fixed navbar
+                const offsetTop = target.offsetTop - 72; // Account for fixed navbar
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
                 });
                 // Update again after scroll completes
-                setTimeout(updateTimecodeDisplay, 500);
+                setTimeout(updateNavActiveState, 500);
             }
         }
         // External links will navigate normally (no active state change)
@@ -240,11 +226,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 btn.classList.remove('active');
             }
         });
-        
-        // Update timecode display immediately
-        if (timecodeValue) {
-            timecodeValue.textContent = targetPage;
-        }
 
         // Handle #home or just # to scroll to top
         if (href === '#home' || href === '#') {
@@ -252,69 +233,42 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 top: 0,
                 behavior: 'smooth'
             });
-            setTimeout(updateTimecodeDisplay, 500);
+            setTimeout(updateNavActiveState, 500);
             return;
         }
 
         const target = document.querySelector(href);
         if (target) {
-            const offsetTop = target.offsetTop - 70; // Account for fixed navbar
+            const offsetTop = target.offsetTop - 72; // Account for fixed navbar
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
             });
-            setTimeout(updateTimecodeDisplay, 500);
+            setTimeout(updateNavActiveState, 500);
         }
     });
 });
 
-// Update timecode on scroll (throttled for performance)
+// Update nav active state on scroll
 let scrollTimeout;
 window.addEventListener('scroll', () => {
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
-        updateTimecodeDisplay();
+        updateNavActiveState();
     }, 50);
 }, { passive: true });
 
-// Timecode Counter - Current Time Display
-let timecodeInterval = null;
-
-function formatTimecode() {
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
-    const milliseconds = Math.floor(now.getMilliseconds() / 10); // Convert to centiseconds (00-99)
-    
-    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}:${String(milliseconds).padStart(2, '0')}`;
-}
-
-function updateTimecodeCounter() {
-    const timecodeCounter = document.getElementById('timecode-counter');
-    if (!timecodeCounter) return;
-    
-    timecodeCounter.textContent = formatTimecode();
-}
-
-// Initialize timecode display and active states on page load
+// Initialize nav active states on page load
 document.addEventListener('DOMContentLoaded', () => {
-    updateTimecodeDisplay();
+    updateNavActiveState();
     
-    // Start timecode counter - shows current time
-    updateTimecodeCounter();
-    timecodeInterval = setInterval(updateTimecodeCounter, 10); // Update every 10ms for smooth display
-    
-    // Also update on hash change (for single-page navigation)
     window.addEventListener('hashchange', () => {
-        updateTimecodeDisplay();
+        updateNavActiveState();
     });
     
-    // Reset active state when window regains focus (user returns from external link)
     window.addEventListener('focus', () => {
-        updateTimecodeDisplay();
+        updateNavActiveState();
     });
-    
 });
 
 // Intersection Observer for fade-in animations
@@ -726,3 +680,123 @@ function populateRecentCredits() {
 
 // Run on page load
 document.addEventListener('DOMContentLoaded', populateRecentCredits);
+
+// Studio Carousel
+document.addEventListener('DOMContentLoaded', () => {
+    const track = document.querySelector('.carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+
+    if (!track || slides.length === 0) return;
+
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    const AUTO_ADVANCE_MS = 5000;
+    let autoAdvanceTimer;
+
+    function goToSlide(index) {
+        currentSlide = (index + totalSlides) % totalSlides;
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+        slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+        dots.forEach((d, i) => {
+            d.classList.toggle('active', i === currentSlide);
+            d.setAttribute('aria-selected', i === currentSlide);
+        });
+
+        resetAutoAdvance();
+    }
+
+    function nextSlide() {
+        goToSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+        goToSlide(currentSlide - 1);
+    }
+
+    function resetAutoAdvance() {
+        clearInterval(autoAdvanceTimer);
+        autoAdvanceTimer = setInterval(nextSlide, AUTO_ADVANCE_MS);
+    }
+
+    prevBtn?.addEventListener('click', prevSlide);
+    nextBtn?.addEventListener('click', nextSlide);
+
+    dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => goToSlide(i));
+    });
+
+    resetAutoAdvance();
+
+    // Lightbox - click to view larger
+    const lightbox = document.getElementById('studio-lightbox');
+    const lightboxImg = lightbox?.querySelector('.lightbox-content img');
+    const lightboxClose = lightbox?.querySelector('.lightbox-close');
+    const lightboxPrev = lightbox?.querySelector('.lightbox-prev');
+    const lightboxNext = lightbox?.querySelector('.lightbox-next');
+
+    function openLightbox(index) {
+        const slide = slides[index];
+        const img = slide?.querySelector('img');
+        const src = img?.currentSrc || img?.src;
+        if (src && lightboxImg) {
+            lightboxImg.src = src;
+            lightboxImg.alt = img?.alt || 'Braz Sound Studio';
+            lightbox?.classList.add('active');
+            lightbox?.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            clearInterval(autoAdvanceTimer);
+        }
+    }
+
+    function closeLightbox() {
+        lightbox?.classList.remove('active');
+        lightbox?.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        resetAutoAdvance();
+    }
+
+    function showLightboxImage(index) {
+        const idx = (index + totalSlides) % totalSlides;
+        const slide = slides[idx];
+        const img = slide?.querySelector('img');
+        const src = img?.currentSrc || img?.src;
+        if (src && lightboxImg) {
+            lightboxImg.src = src;
+        }
+    }
+
+    slides.forEach((slide, i) => {
+        slide.addEventListener('click', () => {
+            goToSlide(i);
+            openLightbox(i);
+        });
+    });
+
+    lightboxClose?.addEventListener('click', closeLightbox);
+    lightbox?.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+        if (lightbox?.classList.contains('active')) {
+            if (e.key === 'ArrowLeft') { prevSlide(); showLightboxImage(currentSlide); }
+            if (e.key === 'ArrowRight') { nextSlide(); showLightboxImage(currentSlide); }
+        }
+    });
+
+    lightboxPrev?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToSlide(currentSlide - 1);
+        showLightboxImage(currentSlide);
+    });
+    lightboxNext?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToSlide(currentSlide + 1);
+        showLightboxImage(currentSlide);
+    });
+});
