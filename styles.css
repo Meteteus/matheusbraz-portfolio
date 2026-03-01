@@ -93,6 +93,12 @@
     box-sizing: border-box;
 }
 
+/* Focus visible for keyboard and tap navigation (accessibility + mobile) */
+:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
 html {
     scroll-behavior: smooth;
     font-size: 16px;
@@ -118,25 +124,33 @@ body {
 }
 
 /* ============================================
-   NAVIGATION - Figma-style glassmorphism
+   NAVIGATION - Glass effect (refracts content behind)
    ============================================ */
 .navbar {
     position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
-    background: rgba(26, 75, 79, 0.85);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-bottom: 1px solid var(--color-border);
+    padding-top: env(safe-area-inset-top, 0);
+    /* Semi-transparent so backdrop-filter always blurs what’s behind */
+    background: rgba(26, 75, 79, 0.45);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 1000;
-    transition: var(--transition);
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05), 0 4px 24px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    /* Glass edge: soft highlight on top, subtle shadow below */
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
 .navbar.scrolled {
-    background: var(--color-bg-panel);
-    box-shadow: var(--shadow-lg);
-    border-bottom-color: var(--color-border);
+    /* Keep glass: still transparent + blur so content behind always refracts */
+    background: rgba(26, 75, 79, 0.55);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 32px rgba(0, 0, 0, 0.25);
+    border-bottom-color: rgba(255, 255, 255, 0.12);
 }
 
 .nav-container {
@@ -202,10 +216,12 @@ body {
     align-items: center;
     gap: 6px;
     padding: 6px 12px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: var(--radius-xl);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .toolbar-btn {
@@ -273,10 +289,15 @@ body {
 .nav-toggle {
     display: none;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     background: transparent;
     border: none;
     gap: 5px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px;
 }
 
 .bar {
@@ -291,10 +312,11 @@ body {
    ============================================ */
 .hero {
     min-height: 100vh;
+    min-height: calc(100vh - env(safe-area-inset-bottom, 0));
     display: flex;
     align-items: center;
     background: var(--color-bg-dark);
-    padding-top: 72px;
+    padding-top: calc(72px + env(safe-area-inset-top, 0));
     position: relative;
     overflow: hidden;
 }
@@ -394,6 +416,7 @@ body {
 
 .btn {
     padding: 14px 28px;
+    min-height: 44px;
     border: none;
     border-radius: var(--radius-xl);
     font-weight: 600;
@@ -660,18 +683,32 @@ section {
 }
 
 .carousel-dot {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-full);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    position: relative;
+}
+
+.carousel-dot::before {
+    content: '';
     width: 10px;
     height: 10px;
     border-radius: var(--radius-full);
     border: 2px solid var(--color-border-light);
     background: transparent;
-    cursor: pointer;
-    padding: 0;
     transition: var(--transition);
 }
 
-.carousel-dot:hover,
-.carousel-dot.active {
+.carousel-dot:hover::before,
+.carousel-dot.active::before {
     background: var(--color-accent);
     border-color: var(--color-accent);
 }
@@ -1127,15 +1164,20 @@ section {
 #contact-form textarea {
     width: 100%;
     padding: var(--space-md);
+    min-height: 44px;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    font-size: var(--font-size-base);
+    font-size: 16px;
     font-family: inherit;
     background: var(--color-bg-alt);
     color: var(--color-text);
     transition: var(--transition);
     margin-bottom: var(--space-md);
     box-shadow: var(--shadow-sm);
+}
+
+#contact-form textarea {
+    min-height: 150px;
 }
 
 #contact-form input:focus,
@@ -1147,11 +1189,11 @@ section {
 
 #contact-form textarea {
     resize: vertical;
-    min-height: 150px;
 }
 
 #contact-form button {
     width: 100%;
+    min-height: 44px;
     padding: var(--space-md) var(--space-2xl);
     background: rgba(255, 255, 255, 0.12);
     color: rgba(255, 255, 255, 0.95);
@@ -1290,6 +1332,7 @@ section {
 
 .filter-btn {
     padding: 10px 18px;
+    min-height: 44px;
     background: transparent;
     border: none;
     border-radius: var(--radius-lg);
@@ -1871,15 +1914,18 @@ section {
     .nav-toolbar {
         position: fixed;
         left: -100%;
-        top: 72px;
+        top: calc(72px + env(safe-area-inset-top, 0));
         width: 100%;
-        background: var(--color-bg-panel);
-        border-top: 1px solid var(--color-border);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        /* Glass: same treatment as navbar so content behind refracts */
+        background: rgba(26, 75, 79, 0.5);
+        backdrop-filter: blur(20px) saturate(160%);
+        -webkit-backdrop-filter: blur(20px) saturate(160%);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
         z-index: 999;
         transition: left 0.3s ease;
         padding: var(--space-2xl) var(--space-lg);
-        max-height: calc(100vh - 72px);
+        max-height: calc(100vh - 72px - env(safe-area-inset-top, 0));
         overflow-y: auto;
         display: flex !important;
         transform: none !important;
@@ -1895,8 +1941,10 @@ section {
         align-items: stretch;
         padding: var(--space-md);
         width: 100%;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid var(--color-border);
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px) saturate(140%);
+        -webkit-backdrop-filter: blur(12px) saturate(140%);
+        border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     .nav-toolbar .toolbar-btn {
@@ -2028,14 +2076,26 @@ section {
     }
 
     .filter-buttons {
-        gap: 0;
-        padding: 4px 6px;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        justify-content: flex-start;
+        gap: 8px;
+        padding: 8px 4px;
+        max-width: 100%;
+    }
+
+    .filter-buttons::-webkit-scrollbar {
+        display: none;
     }
 
     .filter-btn {
-        padding: 8px 14px;
-        font-size: 12px;
+        padding: 10px 16px;
+        min-height: 44px;
+        font-size: 13px;
+        flex-shrink: 0;
     }
 
     .discography-grid {

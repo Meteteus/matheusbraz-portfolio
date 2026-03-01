@@ -2,23 +2,35 @@
 const navToggle = document.getElementById('nav-toggle');
 const navToolbar = document.querySelector('.nav-toolbar');
 
+function setMobileMenuOpen(open) {
+    if (!navToolbar || !navToggle) return;
+    if (open) {
+        navToolbar.classList.add('mobile-active');
+        navToggle.classList.add('active');
+        navToggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+    } else {
+        navToolbar.classList.remove('mobile-active');
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    }
+}
+
 if (navToggle && navToolbar) {
     navToggle.addEventListener('click', (e) => {
         e.stopPropagation();
         const isExpanded = navToolbar.classList.toggle('mobile-active');
         navToggle.classList.toggle('active');
         navToggle.setAttribute('aria-expanded', isExpanded);
+        document.body.style.overflow = isExpanded ? 'hidden' : '';
     });
 }
 
 // Close mobile menu when clicking on a link
 document.querySelectorAll('.toolbar-btn').forEach(link => {
     link.addEventListener('click', () => {
-        if (navToolbar && navToggle) {
-            navToolbar.classList.remove('mobile-active');
-            navToggle.classList.remove('active');
-            navToggle.setAttribute('aria-expanded', false);
-        }
+        setMobileMenuOpen(false);
     });
 });
 
@@ -27,12 +39,7 @@ document.addEventListener('click', (event) => {
     if (navToolbar && navToggle) {
         const isClickInsideNav = event.target.closest('.navbar');
         const isMenuActive = navToolbar.classList.contains('mobile-active');
-
-        if (!isClickInsideNav && isMenuActive) {
-            navToolbar.classList.remove('mobile-active');
-            navToggle.classList.remove('active');
-            navToggle.setAttribute('aria-expanded', false);
-        }
+        if (!isClickInsideNav && isMenuActive) setMobileMenuOpen(false);
     }
 });
 
@@ -728,6 +735,23 @@ document.addEventListener('DOMContentLoaded', () => {
     dots.forEach((dot, i) => {
         dot.addEventListener('click', () => goToSlide(i));
     });
+
+    // Touch swipe for mobile
+    const trackContainer = document.querySelector('.carousel-track-container');
+    if (trackContainer) {
+        let touchStartX = 0;
+        let touchEndX = 0;
+        trackContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        trackContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            const minSwipe = 50;
+            if (diff > minSwipe) nextSlide();
+            else if (diff < -minSwipe) prevSlide();
+        }, { passive: true });
+    }
 
     resetAutoAdvance();
 
