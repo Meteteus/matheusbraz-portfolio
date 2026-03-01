@@ -1449,6 +1449,11 @@ section {
     line-height: 1.4;
 }
 
+.discography-ep {
+    font-size: 0.9em;
+    opacity: 0.85;
+}
+
 .grammy-winner-card .discography-artwork::before {
     content: '';
     position: absolute;
